@@ -6,8 +6,8 @@ CREATE TABLE IF NOT EXISTS `section` (
     `section_id` int(4) NOT NULL,
     `section_name` varchar(64) NOT NULL,
     `quiz_name` varchar(64) DEFAULT NULL,
-    `class_id` char(7)NOT NULL,
-    `course_id` char(7)NOT NULL,
+    `class_id` int(4) NOT NULL,
+    `course_id` char(7) NOT NULL,
     
     FOREIGN KEY (class_id, course_id) REFERENCES class(class_id, course_id),
     PRIMARY KEY (section_id, class_id, course_id)

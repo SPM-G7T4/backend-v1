@@ -5,9 +5,9 @@ DROP TABLE IF EXISTS `class`;
 CREATE TABLE IF NOT EXISTS `class` (
     `class_id` int(4) NOT NULL,
     `class_size` int(3) NOT NULL,
-    `trainer_email` varchar(50) DEFAULT NULL,
-    `start_date` date NOT NULL,
-    `end_date` date NOT NULL,
+    `trainer_email` varchar(64) DEFAULT NULL,
+    `start_date` datetime NOT NULL,
+    `end_date` datetime NOT NULL,
     `course_id` char(7)NOT NULL,
     
     FOREIGN KEY (course_id) REFERENCES course(course_id),
