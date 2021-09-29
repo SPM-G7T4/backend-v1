@@ -12,7 +12,7 @@ CREATE TABLE IF NOT EXISTS `class` (
     
     FOREIGN KEY (course_id) REFERENCES course(course_id),
     FOREIGN KEY (trainer_email) REFERENCES trainer(email),
-    CHECK (end_date > start_date),
+    CHECK (end_datetime > start_datetime),
     PRIMARY KEY (class_id, course_id)
 ) ;
 
