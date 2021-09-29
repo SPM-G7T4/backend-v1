@@ -7,10 +7,12 @@ CREATE TABLE IF NOT EXISTS `enrollment` (
     `enrollment_date` date NOT NULL,
     `course_id` char(7) NOT NULL,
     `class_id` int(4) NOT NULL,
-    `enroller_email` varchar(64) DEFAULT NULL,
+    `hr_enroller_email` varchar(64) DEFAULT NULL,
 
+    PRIMARY KEY (learner_email, course_id, class_id, enrollment_date),
     FOREIGN KEY (learner_email) REFERENCES learner(email),
-    FOREIGN KEY (course_id, class_id) REFERENCES class(course_id, class_id)
+    FOREIGN KEY (course_id, class_id) REFERENCES class(course_id, class_id),
+    FOREIGN KEY (hr_enroller_email) REFERENCES hr(email)
 );
 
 INSERT INTO `enrollment` (`learner_email`, `enrollment_date`, `course_id`, `class_id`) 
