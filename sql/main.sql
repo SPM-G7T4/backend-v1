@@ -87,49 +87,62 @@ INSERT INTO `class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`
 VALUES (1, 30, "swarna@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP2101");
 
 
--- Enrollment
-CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `spm_g7t4`;
-
+-- Enrolment
 DROP TABLE IF EXISTS `enrolment`;
 CREATE TABLE IF NOT EXISTS `enrolment` (
     `learner_email` varchar(64) NOT NULL,
     `enrolment_date` date NOT NULL,
+    `class_start_datetime` datetime NOT NULL,
     `course_id` char(7) NOT NULL,
     `class_id` int(4) NOT NULL,
     `hr_enroler_email` varchar(64) DEFAULT NULL,
+    `approver_email` varchar(64) DEFAULT NULL,
+    `approved` boolean DEFAULT 0,
 
     PRIMARY KEY (learner_email, course_id, class_id, enrolment_date),
     FOREIGN KEY (learner_email) REFERENCES learner(email),
-    FOREIGN KEY (course_id, class_id) REFERENCES class(course_id, class_id),
-    FOREIGN KEY (hr_enroler_email) REFERENCES hr(email)
+    FOREIGN KEY (course_id, class_id, class_start_datetime) REFERENCES class(course_id, class_id, start_datetime),
+    FOREIGN KEY (hr_enroler_email) REFERENCES hr(email),
+    FOREIGN KEY (approver_email) REFERENCES hr(email)
 );
 
-INSERT INTO `enrolment` (`learner_email`, `enrolment_date`, `course_id`, `class_id`) 
-VALUES ("sean@smu.edu.sg", CURRENT_DATE(), "REP1101", 1);
+INSERT INTO `enrolment` (
+    `learner_email`,
+    `enrolment_date`, 
+    `class_start_datetime`, 
+    `course_id`, 
+    `class_id`, 
+    `hr_enroler_email`, 
+    `approver_email`, 
+    `approved`
+) VALUES (
+    "sean@smu.edu.sg", 
+    CURRENT_DATE(),
+    "2021-05-30 23:59:59", 
+    "REP1101", 
+    1,
+    "avigale@smu.edu.sg",
+    "joen@smu.edu.sg",
+    1
+);
 
-INSERT INTO `enrolment` (`learner_email`, `enrolment_date`, `course_id`, `class_id`) 
-VALUES ("niankai@smu.edu.sg", CURRENT_DATE(), "REP1101", 2);
-
--- Section
-DROP TABLE IF EXISTS `section`;
-CREATE TABLE IF NOT EXISTS `section` (
-    `section_id` int(4) NOT NULL,
-    `section_name` varchar(64) NOT NULL,
-    `quiz_name` varchar(64) DEFAULT NULL,
-    `class_id` int(4)NOT NULL,
-    `course_id` char(7)NOT NULL,
-    
-    FOREIGN KEY (class_id, course_id) REFERENCES class(class_id, course_id),
-    PRIMARY KEY (section_id, class_id, course_id)
-) ;
-
-INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`) 
-VALUES (1, "Introductions: Terms", "Term Definitions", 1, "REP1101");
-
-INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`) 
-VALUES (2, "Systems and Operations", "Systems", 1, "REP1101");
-
-INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`) 
-VALUES (1, "Introductions: Users", "Identifying Key Users", 1, "REP2101");
+INSERT INTO `enrolment` (
+    `learner_email`,
+    `enrolment_date`, 
+    `class_start_datetime`, 
+    `course_id`, 
+    `class_id`, 
+    `hr_enroler_email`, 
+    `approver_email`, 
+    `approved`
+) VALUES (
+    "niankai@smu.edu.sg", 
+    CURRENT_DATE(),
+    "2021-05-30 23:59:59", 
+    "REP1101", 
+    2,
+    NULL,
+    "joen@smu.edu.sg",
+    1
+);
 
