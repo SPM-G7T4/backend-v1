@@ -61,17 +61,21 @@ class Course(db.Model):
     course_id = db.Column(db.String(7), primary_key=True)
     course_name = db.Column(db.String(64), nullable=False)
     created_datetime = db.Column(db.DateTime, nullable=True)
+    description = db.Column(db.String(512), nullable=False)
 
-    def __init__(self, course_id, course_name, created_datetime):
+
+    def __init__(self, course_id, course_name, created_datetime, description):
         self.course_id = course_id
         self.course_name = course_name
         self.created_datetime = created_datetime
+        self.description = description
 
     def json(self):
         return {
             "course_id": self.course_id,
             "course_name": self.course_name,
-            "created_datetime": self.created_datetime.strftime("%Y-%m-%d %H:%M:%S")
+            "created_datetime": self.created_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+            "description": self.description
         }
 
 class Class(db.Model):
@@ -79,17 +83,21 @@ class Class(db.Model):
     class_id = db.Column(db.Integer, primary_key=True)
     class_size = db.Column(db.Integer, nullable=False)
     trainer_email = db.Column(db.String(64),db.ForeignKey('trainer.email'), nullable=True)
+    enrol_start_datetime = db.Column(db.DateTime, nullable=True)
+    enrol_end_datetime = db.Column(db.DateTime, nullable=True)
     start_datetime = db.Column(db.DateTime, nullable=True)
     end_datetime = db.Column(db.DateTime, nullable=True)
     course_id = db.Column(db.String(7),db.ForeignKey('course.id'), primary_key=True)
 
-    def __init__(self, class_id, class_size, trainer_email, start_datetime, end_datetime, course_id):
+    def __init__(self, class_id, class_size, trainer_email, start_datetime, end_datetime, course_id, enrol_start_datetime, enrol_end_datetime):
         self.class_id = class_id
         self.class_size = class_size
         self.trainer_email = trainer_email
         self.start_datetime = start_datetime
         self.end_datetime = end_datetime
         self.course_id = course_id
+        self.enrol_start_datetime = enrol_start_datetime
+        self.enrol_end_datetime = enrol_end_datetime
 
     def json(self):
         return {
@@ -98,7 +106,9 @@ class Class(db.Model):
             "trainer_email": self.trainer_email,
             "start_datetime": self.start_datetime.strftime("%Y-%m-%d %H:%M:%S"),
             "end_datetime": self.end_datetime.strftime("%Y-%m-%d %H:%M:%S"),
-            "course_id": self.course_id
+            "course_id": self.course_id,
+            "enrol_start_datetime": self.enrol_start_datetime,
+            "enrol_end_datetime": self.enrol_end_datetime
         }
 
 
@@ -111,14 +121,16 @@ class Enrolment(db.Model):
     class_start_datetime = db.Column(db.DateTime, db.ForeignKey('class.start_datetime'), primary_key=True)
     hr_enroler_email = db.Column(db.String(64), db.ForeignKey('hr.email'), nullable=True)
     approver_email = db.Column(db.String(64), db.ForeignKey('hr.email'), nullable=False)
+    approved = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, learner_email, enrolment_datetime, course_id, class_id, class_start_datetime, hr_enroler_email):
+    def __init__(self, learner_email, enrolment_datetime, course_id, class_id, class_start_datetime, hr_enroler_email, approved):
         self.learner_email = learner_email
         self.enrolment_datetime = enrolment_datetime
         self.course_id = course_id
         self.class_id = class_id
         self.class_start_datetime = class_start_datetime
         self.hr_enroler_email = hr_enroler_email
+        self.approved = approved
         
 
     def json(self):
@@ -128,7 +140,8 @@ class Enrolment(db.Model):
             "course_id": self.course_id,
             "class_id": self.class_id,
             "class_start_datetime": self.class_start_datetime.strftime("%Y-%m-%d %H:%M:%S"),
-            "hr_enroler_email": self.hr_enroler_email
+            "hr_enroler_email": self.hr_enroler_email,
+            "approved": self.approved
         }
 
 class Prerequisite(db.Model):
