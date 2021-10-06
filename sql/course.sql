@@ -16,7 +16,7 @@ INSERT INTO `course` (`course_id`, `course_name`, `description`)
 VALUES ("REP1201", "Printer Operations", "Generic Description for REP1201");
 
 INSERT INTO `course` (`course_id`, `course_name`, `description`) 
-VALUES ("REP1301", "Printer Startup Tutorial", "Generic Description for REP1201");
+VALUES ("REP1301", "Printer Startup Tutorial", "Generic Description for REP1301");
 
 INSERT INTO `course` (`course_id`, `course_name`, `description`) 
-VALUES ("REP2101", "Printing Coach Repairs", "Generic Description for REP1201");
+VALUES ("REP2101", "Printing Coach Repairs", "Generic Description for REP2101");

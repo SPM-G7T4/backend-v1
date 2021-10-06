@@ -60,10 +60,10 @@ INSERT INTO `course` (`course_id`, `course_name`, `description`)
 VALUES ("REP1201", "Printer Operations", "Generic Description for REP1201");
 
 INSERT INTO `course` (`course_id`, `course_name`, `description`) 
-VALUES ("REP1301", "Printer Startup Tutorial", "Generic Description for REP1201");
+VALUES ("REP1301", "Printer Startup Tutorial", "Generic Description for REP1301");
 
 INSERT INTO `course` (`course_id`, `course_name`, `description`) 
-VALUES ("REP2101", "Printing Coach Repairs", "Generic Description for REP1201");
+VALUES ("REP2101", "Printing Coach Repairs", "Generic Description for REP2101");
 
 -- Prerequisite
 CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -74,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `prerequisite` (
     `prerequisite_id` char(7) NOT NULL,
     `postrequisite_id` char(7) NOT NULL,
     `created_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
-
+    
     PRIMARY KEY (prerequisite_id, postrequisite_id),
     FOREIGN KEY (prerequisite_id) REFERENCES course(course_id),
     FOREIGN KEY (postrequisite_id) REFERENCES course(course_id),
