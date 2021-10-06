@@ -31,7 +31,7 @@ INSERT INTO `enrolment` (
 ) VALUES (
     "sean@smu.edu.sg", 
     CURRENT_DATE(),
-    "2021-05-30 23:59:59", 
+    "2021-01-07 00:00:00", 
     "REP1101", 
     1,
     "avigale@smu.edu.sg",
@@ -51,7 +51,7 @@ INSERT INTO `enrolment` (
 ) VALUES (
     "niankai@smu.edu.sg", 
     CURRENT_DATE(),
-    "2021-05-30 23:59:59", 
+    "2021-01-07 00:00:00", 
     "REP1101", 
     2,
     NULL,
