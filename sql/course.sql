@@ -9,7 +9,13 @@ CREATE TABLE IF NOT EXISTS `course` (
 );
 
 INSERT INTO `course` (`course_id`, `course_name`) 
-VALUES ("REP1101", "General Repairs");
+VALUES ("REP1101", "Printer Concepts and Terminology");
+
+INSERT INTO `course` (`course_id`, `course_name`) 
+VALUES ("REP1201", "Printer Operations");
+
+INSERT INTO `course` (`course_id`, `course_name`) 
+VALUES ("REP1301", "Printer Startup Tutorial");
 
 INSERT INTO `course` (`course_id`, `course_name`) 
 VALUES ("REP2101", "Printing Coach Repairs");
