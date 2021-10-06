@@ -129,3 +129,21 @@ class Enrolment(db.Model):
             "class_start_datetime": self.class_start_datetime,
             "hr_enroler_email": self.hr_enroler_email
         }
+
+class Prerequisite(db.Model):
+    __tablename__ = 'prerequisite'
+    prerequisite_id = db.Column(db.String(7), db.ForeignKey('course.course_id'), primary_key=True)
+    postrequisite_id = db.Column(db.String(7), db.ForeignKey('course.course_id'), primary_key=True)
+    created_date = db.Column(db.DateTime, nullable=True)
+
+    def __init__(self, prerequisite_id, postrequisite_id, created_date):
+        self.prerequisite_id = prerequisite_id
+        self.postrequisite_id = postrequisite_id
+        self.created_date = created_date
+    
+    def json(self):
+        return {
+            "prerequisite_id": self.prerequisite_id,
+            "postrequisite_id": self.postrequisite_id,
+            "created_date": self.created_date
+        }

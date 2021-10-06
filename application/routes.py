@@ -11,7 +11,7 @@ from .hr import view_all_hr
 from .trainer import view_all_trainers
 
 # course
-from .course import view_all_courses_test
+from .course import view_all_courses
 from .course import view_course_details_test
 
 # enrolment
@@ -44,7 +44,7 @@ def return_all_trainers():
 # course
 @app.route("/courses", methods=['GET'])
 def return_all_courses():
-    return view_all_courses_test()
+    return view_all_courses()
 
 @app.route("/courses/<course_id>", methods=['GET'])
 def return_course_details(course_id):
