@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
     `course_id` char(7) NOT NULL PRIMARY KEY,
     `course_name` varchar(64) NOT NULL,
-    `created_date` timestamp DEFAULT CURRENT_TIMESTAMP,
+    `created_datetime` timestamp DEFAULT CURRENT_TIMESTAMP,
     `description` varchar(512) NOT NULL
 );
 

@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
     `course_id` char(7) NOT NULL PRIMARY KEY,
     `course_name` varchar(64) NOT NULL,
-    `created_date` timestamp DEFAULT CURRENT_TIMESTAMP,
+    `created_datetime` timestamp DEFAULT CURRENT_TIMESTAMP,
     `description` varchar(512) NOT NULL
 );
 
@@ -66,11 +66,14 @@ INSERT INTO `course` (`course_id`, `course_name`, `description`)
 VALUES ("REP2101", "Printing Coach Repairs", "Generic Description for REP1201");
 
 -- Prerequisite
+CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `spm_g7t4`;
+
 DROP TABLE IF EXISTS `prerequisite`;
 CREATE TABLE IF NOT EXISTS `prerequisite` (
     `prerequisite_id` char(7) NOT NULL,
     `postrequisite_id` char(7) NOT NULL,
-    `created_date` timestamp DEFAULT CURRENT_TIMESTAMP,
+    `created_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
 
     PRIMARY KEY (prerequisite_id, postrequisite_id),
     FOREIGN KEY (prerequisite_id) REFERENCES course(course_id),
@@ -114,10 +117,13 @@ VALUES (1, 30, "swarna@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59"
 
 
 -- Enrolment
+CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `spm_g7t4`;
+
 DROP TABLE IF EXISTS `enrolment`;
 CREATE TABLE IF NOT EXISTS `enrolment` (
     `learner_email` varchar(64) NOT NULL,
-    `enrolment_date` date NOT NULL,
+    `enrolment_datetime` datetime NOT NULL,
     `class_start_datetime` datetime NOT NULL,
     `course_id` char(7) NOT NULL,
     `class_id` int(4) NOT NULL,
@@ -125,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `enrolment` (
     `approver_email` varchar(64) DEFAULT NULL,
     `approved` boolean DEFAULT 0,
 
-    PRIMARY KEY (learner_email, course_id, class_id, enrolment_date),
+    PRIMARY KEY (learner_email, course_id, class_id, class_start_datetime),
     FOREIGN KEY (learner_email) REFERENCES learner(email),
     FOREIGN KEY (course_id, class_id, class_start_datetime) REFERENCES class(course_id, class_id, start_datetime),
     FOREIGN KEY (hr_enroler_email) REFERENCES hr(email),
@@ -134,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `enrolment` (
 
 INSERT INTO `enrolment` (
     `learner_email`,
-    `enrolment_date`, 
+    `enrolment_datetime`, 
     `class_start_datetime`, 
     `course_id`, 
     `class_id`, 
@@ -143,7 +149,7 @@ INSERT INTO `enrolment` (
     `approved`
 ) VALUES (
     "sean@smu.edu.sg", 
-    CURRENT_DATE(),
+    CURRENT_TIMESTAMP,
     "2021-01-07 00:00:00", 
     "REP1101", 
     1,
@@ -154,7 +160,7 @@ INSERT INTO `enrolment` (
 
 INSERT INTO `enrolment` (
     `learner_email`,
-    `enrolment_date`, 
+    `enrolment_datetime`, 
     `class_start_datetime`, 
     `course_id`, 
     `class_id`, 
@@ -163,7 +169,7 @@ INSERT INTO `enrolment` (
     `approved`
 ) VALUES (
     "niankai@smu.edu.sg", 
-    CURRENT_DATE(),
+    CURRENT_TIMESTAMP,
     "2021-01-07 00:00:00", 
     "REP1101", 
     2,
@@ -171,4 +177,3 @@ INSERT INTO `enrolment` (
     "joen@smu.edu.sg",
     1
 );
-

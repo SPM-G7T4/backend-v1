@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `prerequisite`;
 CREATE TABLE IF NOT EXISTS `prerequisite` (
     `prerequisite_id` char(7) NOT NULL,
     `postrequisite_id` char(7) NOT NULL,
-    `created_date` timestamp DEFAULT CURRENT_TIMESTAMP,
+    `created_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
 
     PRIMARY KEY (prerequisite_id, postrequisite_id),
     FOREIGN KEY (prerequisite_id) REFERENCES course(course_id),
