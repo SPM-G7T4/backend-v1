@@ -1,4 +1,4 @@
-DROP DATABASE `spm_g7t4`;
+DROP DATABASE IF EXISTS `spm_g7t4`;
 CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `spm_g7t4`;
 
@@ -99,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `class` (
     FOREIGN KEY (course_id) REFERENCES course(course_id),
     FOREIGN KEY (trainer_email) REFERENCES trainer(email),
     CHECK (end_datetime > start_datetime),
-    PRIMARY KEY (class_id, course_id)
+    PRIMARY KEY (class_id, course_id, start_datetime)
 ) ;
 
 INSERT INTO `class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`, `end_datetime`, `course_id`) 
