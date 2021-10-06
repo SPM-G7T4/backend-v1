@@ -68,7 +68,7 @@ VALUES ("REP2101", "Printing Coach Repairs");
 DROP TABLE IF EXISTS `prerequisite`;
 CREATE TABLE IF NOT EXISTS `prerequisite` (
     `prerequisite_id` char(7) NOT NULL,
-    `postrequisite_id` varchar(64) NOT NULL,
+    `postrequisite_id` char(7) NOT NULL,
     `created_date` timestamp DEFAULT CURRENT_TIMESTAMP,
 
     PRIMARY KEY (prerequisite_id, postrequisite_id),
