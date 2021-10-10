@@ -12,7 +12,7 @@ from .trainer import view_all_trainers
 
 # course
 from .course import view_all_courses
-from .course import view_course_details_test
+from .course import view_course_details
 
 # enrolment
 from .enrolment import create_enrolment_test
@@ -48,7 +48,7 @@ def return_all_courses():
 
 @app.route("/courses/<course_id>", methods=['GET'])
 def return_course_details(course_id):
-    return view_course_details_test(course_id)
+    return view_course_details(course_id)
 
 # enrolment
 @app.route("/enrolments/create", methods=['POST'])
