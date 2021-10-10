@@ -44,18 +44,6 @@ def view_all_courses():
             }
         )
 
-def view_course_details_test(course_id):
-    return {
-    "code": 200, 
-    "data": {
-        "course_id": "REP1101",
-        "course_name": "Printer Concepts and Terminology",
-        "classes": [1,2,3,5,6],
-        "description": "Briefly describes the relationship between printers, and their assigned lines, processes and statuses.",
-        "prerequisites": []
-    }
-}
-
 def view_course_details(p_course_id):
     try :
         course = Course.query.filter_by(course_id = p_course_id).all()
