@@ -5,11 +5,18 @@ DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
     `course_id` char(7) NOT NULL PRIMARY KEY,
     `course_name` varchar(64) NOT NULL,
-    `created_date` timestamp DEFAULT CURRENT_TIMESTAMP
+    `created_datetime` timestamp DEFAULT CURRENT_TIMESTAMP,
+    `description` varchar(512) NOT NULL
 );
 
-INSERT INTO `course` (`course_id`, `course_name`) 
-VALUES ("REP1101", "General Repairs");
+INSERT INTO `course` (`course_id`, `course_name`, `description`) 
+VALUES ("REP1101", "Printer Concepts and Terminology","Briefly describes the relationship between printers, and their assigned lines, processes and statuses.");
 
-INSERT INTO `course` (`course_id`, `course_name`) 
-VALUES ("REP2101", "Printing Coach Repairs");
+INSERT INTO `course` (`course_id`, `course_name`, `description`) 
+VALUES ("REP1201", "Printer Operations", "Generic Description for REP1201");
+
+INSERT INTO `course` (`course_id`, `course_name`, `description`) 
+VALUES ("REP1301", "Printer Startup Tutorial", "Generic Description for REP1301");
+
+INSERT INTO `course` (`course_id`, `course_name`, `description`) 
+VALUES ("REP2101", "Printing Coach Repairs", "Generic Description for REP2101");
