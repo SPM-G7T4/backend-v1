@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `enrolment` (
     `class_id` int(4) NOT NULL,
     `hr_enroler_email` varchar(64) DEFAULT NULL,
     `approver_email` varchar(64) DEFAULT NULL,
-    `approved` varchar(10) DEFAULT `pending`,
+    `approved` varchar(10) DEFAULT NULL,
 
     PRIMARY KEY (learner_email, course_id, class_id, class_start_datetime),
     FOREIGN KEY (learner_email) REFERENCES learner(email),
