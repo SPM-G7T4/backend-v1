@@ -34,7 +34,7 @@ INSERT INTO `enrolment` (
     "2021-01-07 00:00:00", 
     "REP1101", 
     1,
-    "avigale@smu.edu.sg",
+    NULL,
     "joen@smu.edu.sg",
     "approved"
 );
@@ -54,7 +54,7 @@ INSERT INTO `enrolment` (
     "2021-01-07 00:00:00", 
     "REP1101", 
     2,
-    "niankai@smu.edu.sg",
+    NULL,
     "joen@smu.edu.sg",
     "approved"
 );
