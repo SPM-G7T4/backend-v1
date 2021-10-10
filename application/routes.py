@@ -1,5 +1,7 @@
 from flask import render_template
 from flask import current_app as app
+from flask import request
+import json
 
 # Routes to files
 
@@ -15,7 +17,7 @@ from .course import view_all_courses
 from .course import view_course_details
 
 # enrolment
-from .enrolment import create_enrolment_test
+from .enrolment import create_enrolment
 from .enrolment import view_enrolment_test
 
 
@@ -53,7 +55,10 @@ def return_course_details(course_id):
 # enrolment
 @app.route("/enrolments/create", methods=['POST'])
 def return_enrolment_creation_status():
-    return create_enrolment_test()
+    data = request.data
+    jsonResponse = json.loads(data.decode('utf-8'))
+    
+    return create_enrolment(jsonResponse)
 
 @app.route("/enrolments/view", methods=['POST'])
 def return_all_enrolment():

@@ -116,14 +116,14 @@ class Enrolment(db.Model):
     __tablename__ = 'enrolment'
     learner_email = db.Column(db.String(64), db.ForeignKey('learner.email'), primary_key=True)
     enrolment_datetime = db.Column(db.DateTime, nullable=False)
-    course_id = db.Column(db.String(7), db.ForeignKey('course.id'), primary_key=True)
-    class_id = db.Column(db.Integer, db.ForeignKey('class.id'), primary_key=True)
+    course_id = db.Column(db.String(7), db.ForeignKey('course.course_id'), primary_key=True)
+    class_id = db.Column(db.Integer, db.ForeignKey('class.class_id'), primary_key=True)
     class_start_datetime = db.Column(db.DateTime, db.ForeignKey('class.start_datetime'), primary_key=True)
     hr_enroler_email = db.Column(db.String(64), db.ForeignKey('hr.email'), nullable=True)
-    approver_email = db.Column(db.String(64), db.ForeignKey('hr.email'), nullable=False)
-    approved = db.Column(db.Integer, nullable=False)
+    approver_email = db.Column(db.String(64), db.ForeignKey('hr.email'), nullable=True)
+    approved = db.Column(db.String(10), nullable=False)
 
-    def __init__(self, learner_email, enrolment_datetime, course_id, class_id, class_start_datetime, hr_enroler_email, approved):
+    def __init__(self, learner_email, course_id, class_id, class_start_datetime, hr_enroler_email, approved, enrolment_datetime = datetime.now()):
         self.learner_email = learner_email
         self.enrolment_datetime = enrolment_datetime
         self.course_id = course_id
