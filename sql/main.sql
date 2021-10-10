@@ -129,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `enrolment` (
     `class_id` int(4) NOT NULL,
     `hr_enroler_email` varchar(64) DEFAULT NULL,
     `approver_email` varchar(64) DEFAULT NULL,
-    `approved` boolean DEFAULT 0,
+    `approved` varchar(10) DEFAULT `pending`,
 
     PRIMARY KEY (learner_email, course_id, class_id, class_start_datetime),
     FOREIGN KEY (learner_email) REFERENCES learner(email),
@@ -155,7 +155,7 @@ INSERT INTO `enrolment` (
     1,
     "avigale@smu.edu.sg",
     "joen@smu.edu.sg",
-    1
+    "approved"
 );
 
 INSERT INTO `enrolment` (
@@ -173,7 +173,7 @@ INSERT INTO `enrolment` (
     "2021-01-07 00:00:00", 
     "REP1101", 
     2,
-    NULL,
+    "niankai@smu.edu.sg",
     "joen@smu.edu.sg",
-    1
+    "approved"
 );
