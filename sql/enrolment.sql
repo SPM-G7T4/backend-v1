@@ -4,7 +4,7 @@ USE `spm_g7t4`;
 DROP TABLE IF EXISTS `enrolment`;
 CREATE TABLE IF NOT EXISTS `enrolment` (
     `learner_email` varchar(64) NOT NULL,
-    `enrolment_datetime` datetime NOT NULL,
+    `enrolment_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
     `class_start_datetime` datetime NOT NULL,
     `course_id` char(7) NOT NULL,
     `class_id` int(4) NOT NULL,
