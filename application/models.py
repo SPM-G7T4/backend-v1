@@ -161,3 +161,22 @@ class Prerequisite(db.Model):
             "postrequisite_id": self.postrequisite_id,
             "created_datetime": self.created_datetime.strftime("%Y-%m-%d %H:%M:%S")
         }
+
+class Completed(db.Model):
+    __tablename__ = 'completed'
+    learner_email = db.Column(db.String(64), db.ForeignKey('learner.email'), primary_key=True)
+    course_id = db.Column(db.String(7), db.ForeignKey('course.course_id'), primary_key=True)
+    completion_datetime = db.Column(db.DateTime, nullable=True)
+
+    def __init__(self, learner_email, course_id, completion_datetime = datetime.now()):
+        self.learner_email = learner_email
+        self.course_id = course_id
+        self.completion_datetime = completion_datetime
+    
+    def json(self):
+        return {
+            "learner_email": self.learner_email,
+            "course_id": self.course_id,
+            "completion_datetime": self.completion_datetime.strftime("%Y-%m-%d %H:%M:%S")
+        }
+

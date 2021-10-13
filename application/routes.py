@@ -20,6 +20,9 @@ from .course import view_course_details
 from .enrolment import create_enrolment
 from .enrolment import view_enrolment_test
 
+# completed
+from .completed import view_completed_courses
+
 
 
 # Endpoints
@@ -63,6 +66,15 @@ def return_enrolment_creation_status():
 @app.route("/enrolments/view", methods=['POST'])
 def return_all_enrolment():
     return view_enrolment_test()
+
+# completed
+@app.route("/completed/view", methods=['POST'])
+def return_completed_courses():
+    data = request.data
+    jsonResponse = json.loads(data.decode('utf-8'))
+    extracted_learner_email =  jsonResponse["learner_email"]
+
+    return view_completed_courses(extracted_learner_email)
 
 @app.errorhandler(404)
 def page_not_found(error):
