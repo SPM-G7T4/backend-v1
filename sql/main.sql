@@ -115,6 +115,29 @@ VALUES (2, 40, "swarna@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59"
 INSERT INTO `class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`, `end_datetime`, `course_id`, `enrol_start_datetime`, `enrol_end_datetime`)  
 VALUES (1, 30, "swarna@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP2101", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
 
+-- Completed
+CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `spm_g7t4`;
+
+DROP TABLE IF EXISTS `completed`;
+CREATE TABLE IF NOT EXISTS `completed` (
+    `learner_email` varchar(64) NOT NULL,
+    `course_id` char(7) NOT NULL,
+    `completion_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+    
+
+    PRIMARY KEY (learner_email, course_id),
+    FOREIGN KEY (learner_email) REFERENCES learner(email),
+    FOREIGN KEY (course_id) REFERENCES course(course_id)
+);
+
+INSERT INTO `completed` (
+    `learner_email`,
+    `course_id` 
+) VALUES (
+    "sean@smu.edu.sg", 
+    "REP1101"
+);
 
 -- Enrolment
 CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
