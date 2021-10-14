@@ -7,6 +7,7 @@ import json
 
 # learner
 from .learner import view_all_learners
+from .learner import check_eligibility
 # hr
 from .hr import view_all_hr
 # trainer
@@ -35,6 +36,16 @@ def hello_world():
 @app.route("/learners", methods=['GET'])
 def return_all_learners():
     return view_all_learners()
+
+@app.route("/learners/eligibility", methods=['POST'])
+def return_eligibility():
+    data = request.data
+    jsonResponse = json.loads(data.decode('utf-8'))
+    extracted_learner_email =  jsonResponse["learner_email"]
+    extracted_course_id =  jsonResponse["course_id"]
+    extracted_class_id =  jsonResponse["class_id"]
+
+    return check_eligibility(extracted_learner_email, extracted_course_id, extracted_class_id)
 
 # hr
 @app.route("/hr", methods=['GET'])
