@@ -18,7 +18,7 @@ from .course import view_course_details
 
 # enrolment
 from .enrolment import create_enrolment
-from .enrolment import view_enrolment_test
+from .enrolment import view_enrolment
 
 # completed
 from .completed import view_completed_courses
@@ -65,7 +65,11 @@ def return_enrolment_creation_status():
 
 @app.route("/enrolments/view", methods=['POST'])
 def return_all_enrolment():
-    return view_enrolment_test()
+    data = request.data
+    jsonResponse = json.loads(data.decode('utf-8'))
+    extracted_learner_email =  jsonResponse["learner_email"]
+
+    return view_enrolment(extracted_learner_email)
 
 # completed
 @app.route("/completed/view", methods=['POST'])

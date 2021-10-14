@@ -1,15 +1,6 @@
-from application.models import Enrolment
+from application.models import Enrolment, Course, Class
 from flask import jsonify
 from application import db
-
-
-def create_enrolment_test():
-    return jsonify(
-        {
-            "code": 201,
-            "message": "Success"
-        }
-    )
 
 def create_enrolment(request_body):
     try :
@@ -42,32 +33,41 @@ def create_enrolment(request_body):
             }
         )
 
+def view_enrolment(input_learner_email):
+    try:
+        listOfEnrolments = []
+        dbEnrolmentList = Enrolment.query.filter_by(learner_email = input_learner_email).all()
 
-def view_enrolment_test():
-    return jsonify(
-        {
-            "code": 200,
-            "message": "Success",
-            "data": {
-                "learner_email": "sue.lim@allinOne.com",
-                "enrolments": [
-                    {
-                        "course_id":"REP1101",
-                        "class_id": 1
-                    },
-                    {
-                        "course_id":"REP1201",
-                        "class_id": 2
-                    }
-                ]
+        for e in dbEnrolmentList:
+            enrolmentJSON = e.json()
+            dbCourseDetails = Course.query.with_entities(Course.course_name, Course.description).filter_by(course_id = enrolmentJSON["course_id"]).first()
+            dbClassDetails = Class.query.with_entities(Class.trainer_email, Class.start_datetime, Class.end_datetime, Class.class_size).filter_by(course_id = enrolmentJSON["course_id"], class_id = enrolmentJSON["class_id"]).first()
+            eachEnrolment = {
+                "course_id": enrolmentJSON["course_id"],
+                "class_id": enrolmentJSON["class_id"],
+                "course_name": dbCourseDetails[0],
+                "description": dbCourseDetails[1],
+                "trainer_email": dbClassDetails[0],
+                "class_start_datetime": dbClassDetails[1].strftime("%Y-%m-%d %H:%M:%S"),
+                "class_end_datetime": dbClassDetails[2].strftime("%Y-%m-%d %H:%M:%S"),
+                "class_size": dbClassDetails[3]
             }
-        }
-    )
+            listOfEnrolments.append(eachEnrolment)
+            
+        return jsonify(
+            {
+                "code": 200,
+                "message": "Success",
+                "data": {
+                    "enrolments": listOfEnrolments
+                }
+            }
+        )
 
-def view_enrolment():
-    return jsonify(
-        {
-            "code" : 500,
-            "message" : "work in progress"
-        }
-    )
+    except Exception as e:
+        return jsonify(
+            {
+                "code": 500,
+                "message": "There was an issue viewing the enrolments. " + str(e)
+            }
+        )
