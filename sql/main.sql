@@ -115,6 +115,29 @@ VALUES (2, 40, "swarna@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59"
 INSERT INTO `class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`, `end_datetime`, `course_id`, `enrol_start_datetime`, `enrol_end_datetime`)  
 VALUES (1, 30, "swarna@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP2101", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
 
+-- Completed
+CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `spm_g7t4`;
+
+DROP TABLE IF EXISTS `completed`;
+CREATE TABLE IF NOT EXISTS `completed` (
+    `learner_email` varchar(64) NOT NULL,
+    `course_id` char(7) NOT NULL,
+    `completion_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
+    
+
+    PRIMARY KEY (learner_email, course_id),
+    FOREIGN KEY (learner_email) REFERENCES learner(email),
+    FOREIGN KEY (course_id) REFERENCES course(course_id)
+);
+
+INSERT INTO `completed` (
+    `learner_email`,
+    `course_id` 
+) VALUES (
+    "sean@smu.edu.sg", 
+    "REP1101"
+);
 
 -- Enrolment
 CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
@@ -123,13 +146,13 @@ USE `spm_g7t4`;
 DROP TABLE IF EXISTS `enrolment`;
 CREATE TABLE IF NOT EXISTS `enrolment` (
     `learner_email` varchar(64) NOT NULL,
-    `enrolment_datetime` datetime NOT NULL,
+    `enrolment_datetime` datetime DEFAULT CURRENT_TIMESTAMP,
     `class_start_datetime` datetime NOT NULL,
     `course_id` char(7) NOT NULL,
     `class_id` int(4) NOT NULL,
     `hr_enroler_email` varchar(64) DEFAULT NULL,
     `approver_email` varchar(64) DEFAULT NULL,
-    `approved` boolean DEFAULT 0,
+    `approved` varchar(10) DEFAULT NULL,
 
     PRIMARY KEY (learner_email, course_id, class_id, class_start_datetime),
     FOREIGN KEY (learner_email) REFERENCES learner(email),
@@ -153,9 +176,9 @@ INSERT INTO `enrolment` (
     "2021-01-07 00:00:00", 
     "REP1101", 
     1,
-    "avigale@smu.edu.sg",
+    NULL,
     "joen@smu.edu.sg",
-    1
+    "approved"
 );
 
 INSERT INTO `enrolment` (
@@ -175,5 +198,5 @@ INSERT INTO `enrolment` (
     2,
     NULL,
     "joen@smu.edu.sg",
-    1
+    "approved"
 );

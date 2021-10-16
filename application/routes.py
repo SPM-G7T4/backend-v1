@@ -1,10 +1,13 @@
 from flask import render_template
 from flask import current_app as app
+from flask import request
+import json
 
 # Routes to files
 
 # learner
 from .learner import view_all_learners
+from .learner import check_eligibility
 # hr
 from .hr import view_all_hr
 # trainer
@@ -12,11 +15,14 @@ from .trainer import view_all_trainers
 
 # course
 from .course import view_all_courses
-from .course import view_course_details_test
+from .course import view_course_details
 
 # enrolment
-from .enrolment import create_enrolment_test
-from .enrolment import view_enrolment_test
+from .enrolment import create_enrolment
+from .enrolment import view_enrolment
+
+# completed
+from .completed import view_completed_courses
 
 
 
@@ -30,6 +36,16 @@ def hello_world():
 @app.route("/learners", methods=['GET'])
 def return_all_learners():
     return view_all_learners()
+
+@app.route("/learners/eligibility", methods=['POST'])
+def return_eligibility():
+    data = request.data
+    jsonResponse = json.loads(data.decode('utf-8'))
+    extracted_learner_email =  jsonResponse["learner_email"]
+    extracted_course_id =  jsonResponse["course_id"]
+    extracted_class_id =  jsonResponse["class_id"]
+
+    return check_eligibility(extracted_learner_email, extracted_course_id, extracted_class_id)
 
 # hr
 @app.route("/hr", methods=['GET'])
@@ -48,16 +64,32 @@ def return_all_courses():
 
 @app.route("/courses/<course_id>", methods=['GET'])
 def return_course_details(course_id):
-    return view_course_details_test(course_id)
+    return view_course_details(course_id)
 
 # enrolment
 @app.route("/enrolments/create", methods=['POST'])
 def return_enrolment_creation_status():
-    return create_enrolment_test()
+    data = request.data
+    jsonResponse = json.loads(data.decode('utf-8'))
+    
+    return create_enrolment(jsonResponse)
 
 @app.route("/enrolments/view", methods=['POST'])
 def return_all_enrolment():
-    return view_enrolment_test()
+    data = request.data
+    jsonResponse = json.loads(data.decode('utf-8'))
+    extracted_learner_email =  jsonResponse["learner_email"]
+
+    return view_enrolment(extracted_learner_email)
+
+# completed
+@app.route("/completed/view", methods=['POST'])
+def return_completed_courses():
+    data = request.data
+    jsonResponse = json.loads(data.decode('utf-8'))
+    extracted_learner_email =  jsonResponse["learner_email"]
+
+    return view_completed_courses(extracted_learner_email)
 
 @app.errorhandler(404)
 def page_not_found(error):
