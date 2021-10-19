@@ -4,6 +4,7 @@ from application import db
 
 def create_enrolment(request_body):
     try :
+        #self enrol
         if "hr_enroler_email" not in request_body:
             request_body["hr_enroler_email"] = None
 
@@ -21,7 +22,7 @@ def create_enrolment(request_body):
         return jsonify(
             {
                 "code": 201,
-                "message": "Success"
+                "message": "Learner enrolment is created."
             }
         )
 
@@ -29,10 +30,11 @@ def create_enrolment(request_body):
         return jsonify(
             {
                 "code": 500,
-                "message": "There was an issue create an enrolment. " + str(e)
+                "message": "An error occurred while creating the enrolment." + str(e)
             }
         )
 
+#Get enrolments of specific learner by learner_email
 def view_enrolment(input_learner_email):
     try:
         listOfEnrolments = []
@@ -53,7 +55,7 @@ def view_enrolment(input_learner_email):
                 "class_size": dbClassDetails[3]
             }
             listOfEnrolments.append(eachEnrolment)
-            
+
         return jsonify(
             {
                 "code": 200,
@@ -67,7 +69,7 @@ def view_enrolment(input_learner_email):
     except Exception as e:
         return jsonify(
             {
-                "code": 500,
-                "message": "There was an issue viewing the enrolments. " + str(e)
+                "code": 404,
+                "message": "Learner Email not found." + str(e)
             }
         )
