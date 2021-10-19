@@ -18,8 +18,8 @@ def view_all_learners():
         
         return jsonify(
             {
-                "code": 500,
-                "message": "There was an issue retrieving all learners. " + str(e)
+                "code": 404,
+                "message": "Learner not found." + str(e)
             }
         )
 

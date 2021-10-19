@@ -39,11 +39,11 @@ def view_all_courses():
     except Exception as e:
         return jsonify(
             {
-                "code": 500,
-                "message": "There was an issue retrieving all courses. " + str(e)
+                "code": 404,
+                "message": "The Course List cannot be shown." + str(e)
             }
         )
-
+#Get Course Detail by course_id
 def view_course_details(p_course_id):
     try :
         course = Course.query.filter_by(course_id = p_course_id).all()
@@ -78,7 +78,7 @@ def view_course_details(p_course_id):
     except Exception as e:
         return jsonify(
             {
-                "code": 500,
-                "message": "There was an issue retrieving all courses. " + str(e)
+                "code": 404,
+                "message": "Course ID unable to locate." + str(e)
             }
         )
