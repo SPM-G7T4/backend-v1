@@ -17,8 +17,8 @@ def view_all_trainers():
         
         return jsonify(
             {
-                "code": 500,
-                "message": "There was an issue retrieving all trainers. " + str(e)
+                "code": 404,
+                "message": "Trainers could not be found." + str(e)
             }
         )
 
