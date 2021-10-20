@@ -40,7 +40,6 @@ def view_enrolment(input_learner_email):
 
         for e in dbEnrolmentList:
             enrolmentJSON = e.json()
-            print(enrolmentJSON)
             dbCourseDetails = Course.query.with_entities(Course.course_name, Course.description).filter_by(course_id = enrolmentJSON["course_id"]).first()
             dbClassDetails = Class.query.with_entities(Class.trainer_email, Class.start_datetime, Class.end_datetime, Class.class_size).filter_by(course_id = enrolmentJSON["course_id"], class_id = enrolmentJSON["class_id"]).first()
             eachEnrolment = {
