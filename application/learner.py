@@ -98,14 +98,14 @@ def get_eligibility_and_reason(input_learner_email, input_course_id, input_class
     #     "class_id" : 1
     # }
 
-    # Check Pending and Approved
-    dbEnrolmentApproved = Enrolment.query.with_entities(Enrolment.approved).filter_by(learner_email = input_learner_email, course_id = input_course_id, class_id = input_class_id).first()[0]
-    if dbEnrolmentApproved == "approved":
+    # Check Status
+    dbEnrolmentStatus = Enrolment.query.with_entities(Enrolment.status).filter_by(learner_email = input_learner_email, course_id = input_course_id, class_id = input_class_id).first()[0]
+    if dbEnrolmentStatus == "enrolled":
         eligibility = False
         reason = "Enrolled"
         return [eligibility, reason]
 
-    elif dbEnrolmentApproved == "pending":
+    elif dbEnrolmentStatus == "pending":
         eligibility = False
         reason = "Requested"
         return [eligibility, reason]

@@ -13,7 +13,7 @@ def create_enrolment(request_body):
             class_id = request_body["class_id"],
             class_start_datetime = request_body["class_start_datetime"],
             hr_enroler_email = request_body["hr_enroler_email"],
-            approved = "pending"
+            status = "pending"
         )
         db.session.add(new_enrolment)
         db.session.commit()
@@ -40,6 +40,7 @@ def view_enrolment(input_learner_email):
 
         for e in dbEnrolmentList:
             enrolmentJSON = e.json()
+            print(enrolmentJSON)
             dbCourseDetails = Course.query.with_entities(Course.course_name, Course.description).filter_by(course_id = enrolmentJSON["course_id"]).first()
             dbClassDetails = Class.query.with_entities(Class.trainer_email, Class.start_datetime, Class.end_datetime, Class.class_size).filter_by(course_id = enrolmentJSON["course_id"], class_id = enrolmentJSON["class_id"]).first()
             eachEnrolment = {
@@ -50,7 +51,8 @@ def view_enrolment(input_learner_email):
                 "trainer_email": dbClassDetails[0],
                 "class_start_datetime": dbClassDetails[1].strftime("%Y-%m-%d %H:%M:%S"),
                 "class_end_datetime": dbClassDetails[2].strftime("%Y-%m-%d %H:%M:%S"),
-                "class_size": dbClassDetails[3]
+                "class_size": dbClassDetails[3],
+                "status": enrolmentJSON["status"]
             }
             listOfEnrolments.append(eachEnrolment)
             
