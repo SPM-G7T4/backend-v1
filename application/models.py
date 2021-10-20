@@ -107,8 +107,8 @@ class Class(db.Model):
             "start_datetime": self.start_datetime.strftime("%Y-%m-%d %H:%M:%S"),
             "end_datetime": self.end_datetime.strftime("%Y-%m-%d %H:%M:%S"),
             "course_id": self.course_id,
-            "enrol_start_datetime": self.enrol_start_datetime,
-            "enrol_end_datetime": self.enrol_end_datetime
+            "enrol_start_datetime": self.enrol_start_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+            "enrol_end_datetime": self.enrol_end_datetime.strftime("%Y-%m-%d %H:%M:%S")
         }
 
 
