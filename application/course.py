@@ -34,7 +34,7 @@ def view_all_courses():
                     "courses": listOfCourses
                 }
             }
-        )
+        ), 200
 
     except Exception as e:
         return jsonify(
@@ -42,7 +42,7 @@ def view_all_courses():
                 "code": 500,
                 "message": "There was an issue retrieving all courses. " + str(e)
             }
-        )
+        ), 500
 
 def view_course_details(p_course_id):
     try :
@@ -77,7 +77,7 @@ def view_course_details(p_course_id):
                 "message": "Success",
                 "data": courseJSON
             }
-        )
+        ), 200
 
     except Exception as e:
         return jsonify(
@@ -85,4 +85,4 @@ def view_course_details(p_course_id):
                 "code": 500,
                 "message": "There was an issue retrieving all courses. " + str(e)
             }
-        )
+        ), 500

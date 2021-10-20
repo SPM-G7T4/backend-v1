@@ -19,7 +19,7 @@ def view_completed_courses(input_learner_email):
                     "course_completed": listOfCompletedCourses
                 }
             }
-        )
+        ), 200
 
     except Exception as e:
         return jsonify(
@@ -27,5 +27,5 @@ def view_completed_courses(input_learner_email):
                 "code": 500,
                 "message": "There was an issue viewing completed courses. " + str(e)
             }
-        )
+        ), 500
 

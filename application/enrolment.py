@@ -23,7 +23,7 @@ def create_enrolment(request_body):
                 "code": 201,
                 "message": "Success"
             }
-        )
+        ), 201
 
     except Exception as e:
         return jsonify(
@@ -31,7 +31,7 @@ def create_enrolment(request_body):
                 "code": 500,
                 "message": "There was an issue create an enrolment. " + str(e)
             }
-        )
+        ), 500
 
 def view_enrolment(input_learner_email):
     try:
@@ -62,7 +62,7 @@ def view_enrolment(input_learner_email):
                     "enrolments": listOfEnrolments
                 }
             }
-        )
+        ), 200
 
     except Exception as e:
         return jsonify(
@@ -70,4 +70,4 @@ def view_enrolment(input_learner_email):
                 "code": 500,
                 "message": "There was an issue viewing the enrolments. " + str(e)
             }
-        )
+        ), 500
