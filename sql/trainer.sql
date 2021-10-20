@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `trainer` (
 );
 
 INSERT INTO `trainer` (`email`, `name`, `password`) 
-VALUES ("jiale@smu.edu.sg", "jiale", "123");
+VALUES ("jiale@smu.edu.sg", "Ong Jia Le", "123");
 
 INSERT INTO `trainer` (`email`, `name`, `password`) 
-VALUES ("swarna@smu.edu.sg", "swarna", "123");
+VALUES ("ken@smu.edu.sg", "Ken Tich", "123");

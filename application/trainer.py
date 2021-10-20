@@ -11,7 +11,7 @@ def view_all_trainers():
                     "trainers": [trainer.json() for trainer in trainerList]
                 }
             }
-        )
+        ), 200
 
     except Exception as e:
         
@@ -20,6 +20,6 @@ def view_all_trainers():
                 "code": 500,
                 "message": "There was an issue retrieving all trainers. " + str(e)
             }
-        )
+        ), 500
 
 # Add more functions here 

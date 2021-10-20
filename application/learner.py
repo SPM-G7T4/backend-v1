@@ -12,7 +12,7 @@ def view_all_learners():
                     "learners": [learner.json() for learner in learnerList]
                 }
             }
-        )
+        ), 200
 
     except Exception as e:
         
@@ -21,7 +21,7 @@ def view_all_learners():
                 "code": 500,
                 "message": "There was an issue retrieving all learners. " + str(e)
             }
-        )
+        ), 500
 
 def check_eligibility(input_learner_email, input_course_id, input_class_id):
     
@@ -37,7 +37,7 @@ def check_eligibility(input_learner_email, input_course_id, input_class_id):
                     "reason": reason
                 }
             }
-        )
+        ), 200
 
     except Exception as e:
         return jsonify(
@@ -45,7 +45,7 @@ def check_eligibility(input_learner_email, input_course_id, input_class_id):
                 "code": 500,
                 "message": "There was an issue viewing the eligibility. " + str(e)
             }
-        )
+        ), 500
 
 def get_eligibility_and_reason(input_learner_email, input_course_id, input_class_id):
     eligibility = True

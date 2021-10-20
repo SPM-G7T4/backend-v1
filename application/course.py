@@ -1,4 +1,4 @@
-from application.models import Course, Class, Prerequisite
+from application.models import Course, Class, Prerequisite, Trainer
 from flask import jsonify
 
 # Add more functions here 
@@ -34,7 +34,7 @@ def view_all_courses():
                     "courses": listOfCourses
                 }
             }
-        )
+        ), 200
 
     except Exception as e:
         return jsonify(
@@ -42,7 +42,7 @@ def view_all_courses():
                 "code": 500,
                 "message": "There was an issue retrieving all courses. " + str(e)
             }
-        )
+        ), 500
 
 def view_course_details(p_course_id):
     try :
@@ -53,10 +53,14 @@ def view_course_details(p_course_id):
 
         dbClassList = Class.query.filter_by(course_id = p_course_id).all() # filter classes by courseid
         for c in dbClassList:
-            classList.append(c.json()["class_id"])
+            
+            input_trainer_email = c.json()["trainer_email"]
+            trainer_name = Trainer.query.with_entities(Trainer.name).filter_by(email = input_trainer_email).first()[0]
+            revisedJSON = c.json()
+            revisedJSON["trainer_name"] = trainer_name
+            classList.append(revisedJSON)
 
         courseJSON["classes"] = classList # add classes list to courseJSON
-        
 
         dbPrerequisite = Prerequisite.query.filter_by(postrequisite_id = p_course_id).all() # filter prerequisite by courseid
         for p in dbPrerequisite:
@@ -73,7 +77,7 @@ def view_course_details(p_course_id):
                 "message": "Success",
                 "data": courseJSON
             }
-        )
+        ), 200
 
     except Exception as e:
         return jsonify(
@@ -81,4 +85,4 @@ def view_course_details(p_course_id):
                 "code": 500,
                 "message": "There was an issue retrieving all courses. " + str(e)
             }
-        )
+        ), 500

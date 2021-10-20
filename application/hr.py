@@ -11,7 +11,7 @@ def view_all_hr():
                     "hr": [hr.json() for hr in hrList]
                 }
             }
-        )
+        ), 200
 
     except Exception as e:
         
@@ -20,6 +20,6 @@ def view_all_hr():
                 "code": 500,
                 "message": "There was an issue retrieving all hr. " + str(e)
             }
-        )
+        ), 500
 
 # Add more functions here 
