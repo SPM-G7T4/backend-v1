@@ -49,6 +49,7 @@ def view_enrolment(input_learner_email=None):
             eachEnrolment = {
                 "course_id": enrolmentJSON["course_id"],
                 "class_id": enrolmentJSON["class_id"],
+                "learner_email": enrolmentJSON["learner_email"],
                 "course_name": dbCourseDetails[0],
                 "description": dbCourseDetails[1],
                 "trainer_email": dbClassDetails[0],
