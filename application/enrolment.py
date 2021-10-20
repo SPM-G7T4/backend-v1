@@ -13,7 +13,7 @@ def create_enrolment(request_body):
             class_id = request_body["class_id"],
             class_start_datetime = request_body["class_start_datetime"],
             hr_enroler_email = request_body["hr_enroler_email"],
-            approved = "pending"
+            status = "pending"
         )
         db.session.add(new_enrolment)
         db.session.commit()
@@ -50,7 +50,8 @@ def view_enrolment(input_learner_email):
                 "trainer_email": dbClassDetails[0],
                 "class_start_datetime": dbClassDetails[1].strftime("%Y-%m-%d %H:%M:%S"),
                 "class_end_datetime": dbClassDetails[2].strftime("%Y-%m-%d %H:%M:%S"),
-                "class_size": dbClassDetails[3]
+                "class_size": dbClassDetails[3],
+                "status": enrolmentJSON["status"]
             }
             listOfEnrolments.append(eachEnrolment)
             
