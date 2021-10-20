@@ -13,7 +13,7 @@ def view_completed_courses(input_learner_email):
         return jsonify(
             {
                 "code": 200,
-                "message": "Success",
+                "message": "Courses taken by" + input_learner_email,
                 "data": {
                     "learner_email": input_learner_email,
                     "course_completed": listOfCompletedCourses
@@ -25,7 +25,7 @@ def view_completed_courses(input_learner_email):
         return jsonify(
             {
                 "code": 500,
-                "message": "There was an issue viewing completed courses. " + str(e)
+                "message": "Unable to view completed courses. " + str(e)
             }
         )
 
