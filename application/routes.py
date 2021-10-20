@@ -75,12 +75,16 @@ def return_enrolment_creation_status():
     return create_enrolment(jsonResponse)
 
 @app.route("/enrolments/view", methods=['POST'])
-def return_all_enrolment():
+def return_learner_enrolment():
     data = request.data
     jsonResponse = json.loads(data.decode('utf-8'))
     extracted_learner_email =  jsonResponse["learner_email"]
 
     return view_enrolment(extracted_learner_email)
+
+@app.route("/enrolments/view", methods=['GET'])
+def return_all_enrolment():
+    return view_enrolment()
 
 # completed
 @app.route("/completed/view", methods=['POST'])
