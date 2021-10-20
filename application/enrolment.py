@@ -70,6 +70,6 @@ def view_enrolment(input_learner_email):
         return jsonify(
             {
                 "code": 404,
-                "message": "Learner Email not found." + str(e)
+                "message": "Learner email not found." + str(e)
             }
         )

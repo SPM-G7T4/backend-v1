@@ -24,8 +24,12 @@ def view_completed_courses(input_learner_email):
     except Exception as e:
         return jsonify(
             {
+                "code": 404,
+                "message": "Learner email not found."
+            },
+            {
                 "code": 500,
-                "message": "Unable to view completed courses. " + str(e)
+                "message": "An error occurred while viewing the completed courses." + str(e)
             }
         )
 
