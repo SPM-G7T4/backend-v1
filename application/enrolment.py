@@ -33,10 +33,14 @@ def create_enrolment(request_body):
             }
         ), 500
 
-def view_enrolment(input_learner_email):
+def view_enrolment(input_learner_email=None):
     try:
         listOfEnrolments = []
-        dbEnrolmentList = Enrolment.query.filter_by(learner_email = input_learner_email).all()
+
+        if input_learner_email:
+            dbEnrolmentList = Enrolment.query.filter_by(learner_email = input_learner_email).all()
+        else:
+            dbEnrolmentList = Enrolment.query.all()
 
         for e in dbEnrolmentList:
             enrolmentJSON = e.json()
