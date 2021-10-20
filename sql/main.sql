@@ -39,10 +39,10 @@ CREATE TABLE IF NOT EXISTS `trainer` (
 );
 
 INSERT INTO `trainer` (`email`, `name`, `password`) 
-VALUES ("jiale@smu.edu.sg", "jiale", "123");
+VALUES ("jiale@smu.edu.sg", "Ong Jia Le", "123");
 
 INSERT INTO `trainer` (`email`, `name`, `password`) 
-VALUES ("swarna@smu.edu.sg", "swarna", "123");
+VALUES ("ken@smu.edu.sg", "Ken Tich", "123");
 
 -- Course
 DROP TABLE IF EXISTS `course`;
@@ -110,16 +110,16 @@ INSERT INTO `class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`
 VALUES (1, 40, "jiale@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP1101", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
 
 INSERT INTO `class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`, `end_datetime`, `course_id`, `enrol_start_datetime`, `enrol_end_datetime`)  
-VALUES (2, 40, "swarna@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP1101", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
+VALUES (2, 40, "ken@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP1101", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
 
 INSERT INTO `class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`, `end_datetime`, `course_id`, `enrol_start_datetime`, `enrol_end_datetime`) 
 VALUES (1, 35, "jiale@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP1201", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
 
 INSERT INTO `class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`, `end_datetime`, `course_id`, `enrol_start_datetime`, `enrol_end_datetime`)  
-VALUES (1, 30, "swarna@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP1301", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
+VALUES (1, 30, "ken@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP1301", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
 
 INSERT INTO `class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`, `end_datetime`, `course_id`, `enrol_start_datetime`, `enrol_end_datetime`)  
-VALUES (1, 30, "swarna@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP2101", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
+VALUES (1, 30, "ken@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP2101", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
 
 -- Completed
 CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
