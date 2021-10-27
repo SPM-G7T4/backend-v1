@@ -207,37 +207,190 @@ INSERT INTO `enrolment` (
     "enrolled"
 );
 
--- Section
-CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `spm_g7t4`;
+-- Quiz
+DROP TABLE IF EXISTS `quiz`;
+CREATE TABLE IF NOT EXISTS `quiz` (
+    `quiz_id` int(4) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `quiz_name` varchar(64) NOT NULL
+);
 
+INSERT INTO `quiz` (`quiz_name`) 
+VALUES ("Term Definitions");
+
+INSERT INTO `quiz` (`quiz_name`) 
+VALUES ("Systems");
+
+INSERT INTO `quiz` (`quiz_name`) 
+VALUES ("Units and Scales");
+
+INSERT INTO `quiz` (`quiz_name`) 
+VALUES ("Component Quiz");
+
+INSERT INTO `quiz` (`quiz_name`) 
+VALUES ("Identifying Key Users");
+
+-- Section
 DROP TABLE IF EXISTS `section`;
 CREATE TABLE IF NOT EXISTS `section` (
     `section_id` int(4) NOT NULL,
     `section_name` varchar(64) NOT NULL,
-    `quiz_name` varchar(64) DEFAULT NULL,
+    `quiz_id` int(4) DEFAULT NULL,
     `class_id` int(4) NOT NULL,
     `course_id` char(7) NOT NULL,
     `class_start_datetime` datetime NOT NULL,
     
     FOREIGN KEY (class_id, course_id, class_start_datetime) REFERENCES class(class_id, course_id, start_datetime),
+    FOREIGN KEY (quiz_id) REFERENCES quiz(quiz_id),
     PRIMARY KEY (section_id, class_id, course_id, class_start_datetime)
+
 ) ;
 
-INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`, `class_start_datetime`) 
-VALUES (1, "Introductions: Terms", "Term Definitions", 1, "REP1101", "2021-01-07 00:00:00");
+INSERT INTO `section` (
+    `section_id`, `section_name`, `quiz_id`,
+    `class_id`, `course_id`, `class_start_datetime`) 
+VALUES (
+    1, "Introductions: Terms", 1, 
+    1, "REP1101", "2021-01-07 00:00:00");
 
-INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`, `class_start_datetime`) 
-VALUES (2, "Systems and Operations", "Systems", 1, "REP1101", "2021-01-07 00:00:00");
+INSERT INTO `section` (
+    `section_id`, `section_name`, `quiz_id`, 
+    `class_id`, `course_id`, `class_start_datetime`) 
+VALUES (
+    2, "Systems and Operations", 2, 
+    1, "REP1101", "2021-01-07 00:00:00");
 
-INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`, `class_start_datetime`) 
-VALUES (1, "Introductions: Terms", "Term Definitions", 2, "REP1101", "2021-01-07 00:00:00");
+INSERT INTO `section` (
+    `section_id`, `section_name`, `quiz_id`, 
+    `class_id`, `course_id`, `class_start_datetime`) 
+VALUES (
+    1, "Introductions: Terms", 1, 
+    2, "REP1101", "2021-01-07 00:00:00");
 
-INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`, `class_start_datetime`) 
-VALUES (1, "Introductions: Measurments", "Units and Scales", 1, "REP1201", "2021-01-07 00:00:00");
+INSERT INTO `section` (
+    `section_id`, `section_name`, `quiz_id`, 
+    `class_id`, `course_id`, `class_start_datetime`) 
+VALUES (
+    1, "Introductions: Measurments", 3, 
+    1, "REP1201", "2021-01-07 00:00:00");
 
-INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`, `class_start_datetime`) 
-VALUES (1, "Introductions: Components", "Component Quiz", 1, "REP1301", "2021-01-07 00:00:00");
+INSERT INTO `section` (
+    `section_id`, `section_name`, `quiz_id`, 
+    `class_id`, `course_id`, `class_start_datetime`) 
+VALUES (
+    1, "Introductions: Components", 4, 
+    1, "REP1301", "2021-01-07 00:00:00");
 
-INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`, `class_start_datetime`) 
-VALUES (1, "Introductions: Users", "Identifying Key Users", 1, "REP2101", "2021-01-07 00:00:00");
+INSERT INTO `section` (
+    `section_id`, `section_name`, `quiz_id`, 
+    `class_id`, `course_id`, `class_start_datetime`) 
+VALUES (
+    1, "Introductions: Users", 5, 
+    1, "REP2101", "2021-01-07 00:00:00");
+
+-- Question
+DROP TABLE IF EXISTS `question`;
+CREATE TABLE IF NOT EXISTS `question` (
+    `question_id` int(4) NOT NULL,
+    `quiz_id` int(4) NOT NULL,
+    `question_text` varchar(128) NOT NULL,
+    `answer_id` int(1) NOT NULL,
+    
+    FOREIGN KEY (quiz_id) REFERENCES quiz(quiz_id),
+    PRIMARY KEY (question_id, quiz_id)
+);
+
+INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`) 
+VALUES (1, 1, "Define 'System'", 1);
+
+INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`) 
+VALUES (2, 1, "Define 'Component'", 3);
+
+INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`) 
+VALUES (1, 2, "What is needed for a System to run?", 2);
+
+INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`) 
+VALUES (2, 2, "A system can only consist of inanimate objects", 2);
+
+INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`) 
+VALUES (1, 3, "A kilometer is shorter than a mile.", 1);
+
+INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`) 
+VALUES (2, 3, "Which of the following is a fundamental quantity", 3);
+
+-- Option
+DROP TABLE IF EXISTS `option`;
+CREATE TABLE IF NOT EXISTS `option` (
+    `option_id` int(4) NOT NULL,
+    `question_id` int(4) NOT NULL,
+    `quiz_id` int(4) NOT NULL,
+    `option_value` varchar(128) NOT NULL,
+    
+    FOREIGN KEY (question_id, quiz_id) REFERENCES question(question_id, quiz_id),
+    PRIMARY KEY (option_id, question_id, quiz_id)
+);
+
+-- Question 1 Quiz 1
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (1, 1, 1, "A set of things working together as parts of a mechanism or an interconnecting network");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (2, 1, 1, "Multiple components joined together");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (3, 1, 1, "People and processes that serve a common purpose");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (4, 1, 1, "Something that generates value by using electricity");
+
+-- Question 2 Quiz 1
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (1, 2, 1, "Objects that are used by humans or other objects");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (2, 2, 1, "An inanimate object");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (3, 2, 1, "A part or element of a larger whole");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (4, 2, 1, "An abstraction of a real-life concept or model");
+
+-- Question 1 Quiz 2
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (1, 1, 2, "Fossil Fuels");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (2, 1, 2, "Energy that matches the expected input of the system");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (3, 1, 2, "Human Labour");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (4, 1, 2, "Renewable Energy");
+
+-- Question 2 Quiz 2
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (1, 2, 2, "True");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (2, 2, 2, "False");
+
+-- Question 1 Quiz 3
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (1, 1, 3, "True");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (2, 1, 3, "True");
+
+-- Question 2 Quiz 3
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (1, 2, 3, "Force");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (2, 2, 3, "Acceleration");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (3, 2, 3, "Luminous Intensity");
+
+INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
+VALUES (4, 2, 3, "Potential Difference");

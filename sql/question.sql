@@ -25,13 +25,7 @@ INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`)
 VALUES (2, 2, "A system can only consist of inanimate objects", 2);
 
 INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`) 
-VALUES (1, 3, "A kilometer is shorter than a mile.", 2);
-
-INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`) 
-VALUES (2, 3, "Which of the following is a fundamental quantity", 3);
-
-INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`) 
-VALUES (1, 3, "A kilometer is shorter than a mile.", 2);
+VALUES (1, 3, "A kilometer is shorter than a mile.", 1);
 
 INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`) 
 VALUES (2, 3, "Which of the following is a fundamental quantity", 3);
