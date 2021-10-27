@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `section`;
 CREATE TABLE IF NOT EXISTS `section` (
     `section_id` int(4) NOT NULL,
     `section_name` varchar(64) NOT NULL,
-    `quiz_id` varchar(64) DEFAULT NULL,
+    `quiz_id` int(4) DEFAULT NULL,
     `class_id` int(4) NOT NULL,
     `course_id` char(7) NOT NULL,
     `class_start_datetime` datetime NOT NULL,
