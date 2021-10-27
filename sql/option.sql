@@ -63,7 +63,7 @@ INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`)
 VALUES (1, 1, 3, "True");
 
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
-VALUES (2, 1, 3, "True");
+VALUES (2, 1, 3, "False");
 
 -- Question 2 Quiz 3
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
