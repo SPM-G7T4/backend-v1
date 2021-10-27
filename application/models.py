@@ -222,4 +222,44 @@ class Section(db.Model):
             "class_start_datetime": self.class_start_datetime.strftime("%Y-%m-%d %H:%M:%S")
         }
 
+class Question(db.Model):
+    __tablename__ = 'question'
+    question_id = db.Column(db.Integer, primary_key=True)
+    quiz_id = db.Column(db.Integer, nullable=False)
+    question_text = db.Column(db.String(128), nullable=False)
+    answer_id = db.Column(db.Integer, nullable=False)
+    
+    def __init__(self, question_id, quiz_id, question_text, answer_id):
+        self.question_id = question_id
+        self.quiz_id = quiz_id
+        self. question_text =  question_text
+        self.answer_id = answer_id
 
+    def json(self):
+        return {
+            "question_id": self.question_id,
+            "quiz_id": self.quiz_id,
+            "question_text": self.question_text,
+            "answer_id": self.answer_id
+        }
+
+class Option(db.Model):
+    __tablename__ = 'option'
+    option_id = db.Column(db.Integer, primary_key=True)
+    question_id = db.Column(db.Integer, nullable=False)
+    quiz_id = db.Column(db.Integer, nullable=False)
+    option_value = db.Column(db.String(128), nullable=False)
+    
+    def __init__(self, option_id, question_id, quiz_id, option_value):
+        self.option_id = option_id
+        self.question_id = question_id
+        self.quiz_id = quiz_id
+        self.option_value = option_value
+
+    def json(self):
+        return {
+            "option_id": self.option_id,
+            "question_id": self.question_id,
+            "quiz_id": self.quiz_id,
+            "option_value": self.option_value
+        }
