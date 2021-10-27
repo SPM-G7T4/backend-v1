@@ -24,6 +24,13 @@ from .enrolment import view_enrolment
 # completed
 from .completed import view_completed_courses
 
+# quiz
+from .quiz import view_quiz
+from .quiz import create_quiz
+from .quiz import update_quiz
+from .quiz import view_quiz_details
+from .quiz import attach_quiz
+
 
 
 # Endpoints
@@ -94,6 +101,34 @@ def return_completed_courses():
     extracted_learner_email =  jsonResponse["learner_email"]
 
     return view_completed_courses(extracted_learner_email)
+
+# quiz
+@app.route("/quiz/view", methods=['GET'])
+def return_all_quiz():
+    return view_quiz()
+@app.route("/quiz/create", methods=['POST'])
+def return_quiz_creation_status():
+    data = request.data
+    jsonResponse = json.loads(data.decode('utf-8'))
+    
+    return create_quiz(jsonResponse)
+@app.route("/quiz/update", methods=['POST'])
+def return_quiz_update_status():
+    data = request.data
+    jsonResponse = json.loads(data.decode('utf-8'))
+    
+    return update_quiz(jsonResponse)
+
+@app.route("/quiz/view/<quiz_id>", methods=['GET'])
+def return_all_quiz_details(quiz_id):
+    return view_quiz_details(quiz_id)
+
+@app.route("/quiz/attach", methods=['POST'])
+def return_quiz_attach_status():
+    data = request.data
+    jsonResponse = json.loads(data.decode('utf-8'))
+    
+    return attach_quiz(jsonResponse)
 
 @app.errorhandler(404)
 def page_not_found(error):
