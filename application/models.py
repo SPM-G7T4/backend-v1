@@ -85,7 +85,7 @@ class Class(db.Model):
     trainer_email = db.Column(db.String(64),db.ForeignKey('trainer.email'), nullable=True)
     enrol_start_datetime = db.Column(db.DateTime, nullable=True)
     enrol_end_datetime = db.Column(db.DateTime, nullable=True)
-    start_datetime = db.Column(db.DateTime, nullable=True)
+    start_datetime = db.Column(db.DateTime, nullable=True, primary_key=True)
     end_datetime = db.Column(db.DateTime, nullable=True)
     course_id = db.Column(db.String(7),db.ForeignKey('course.id'), primary_key=True)
 
@@ -179,4 +179,47 @@ class Completed(db.Model):
             "course_id": self.course_id,
             "completion_datetime": self.completion_datetime.strftime("%Y-%m-%d %H:%M:%S")
         }
+
+class Quiz(db.Model):
+    __tablename__ = 'quiz'
+    quiz_id = db.Column(db.Integer, primary_key=True)
+    quiz_name = db.Column(db.String(64), nullable=False)
+    
+    def __init__(self, quiz_id, quiz_name):
+        self.quiz_id = quiz_id
+        self.quiz_name = quiz_name
+    
+    def json(self):
+        return {
+            "quiz_id": self.quiz_id,
+            "quiz_name": self.quiz_name
+        }
+
+class Section(db.Model):
+    __tablename__ = 'section'
+    section_id = db.Column(db.Integer, primary_key=True)
+    section_name = db.Column(db.String(64), nullable=False)
+    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.quiz_id'), nullable=False)
+    class_id = db.Column(db.Integer, db.ForeignKey('class.class_id'), primary_key=True)
+    course_id = db.Column(db.String(7), db.ForeignKey('course.course_id'), primary_key=True)
+    class_start_datetime = db.Column(db.DateTime, db.ForeignKey('class.start_datetime'), primary_key=True)
+
+    def __init__(self, section_id, section_name, quiz_id, class_id, course_id, class_start_datetime):
+        self.section_id = section_id
+        self.section_name = section_name
+        self.quiz_id = quiz_id
+        self.class_id = class_id
+        self.course_id = course_id
+        self.class_start_datetime = class_start_datetime
+    
+    def json(self):
+        return {
+            "section_id": self.section_id,
+            "section_name": self.section_name,
+            "quiz_id": self.quiz_id,
+            "class_id": self.class_id,
+            "course_id": self.course_id,
+            "class_start_datetime": self.class_start_datetime.strftime("%Y-%m-%d %H:%M:%S")
+        }
+
 

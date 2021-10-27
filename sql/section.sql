@@ -11,7 +11,9 @@ CREATE TABLE IF NOT EXISTS `section` (
     `class_start_datetime` datetime NOT NULL,
     
     FOREIGN KEY (class_id, course_id, class_start_datetime) REFERENCES class(class_id, course_id, start_datetime),
+    FOREIGN KEY (quiz_id) REFERENCES quiz(quiz_id),
     PRIMARY KEY (section_id, class_id, course_id, class_start_datetime)
+
 ) ;
 
 INSERT INTO `section` (
