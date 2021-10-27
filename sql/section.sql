@@ -8,16 +8,26 @@ CREATE TABLE IF NOT EXISTS `section` (
     `quiz_name` varchar(64) DEFAULT NULL,
     `class_id` int(4) NOT NULL,
     `course_id` char(7) NOT NULL,
+    `class_start_datetime` datetime NOT NULL,
     
-    FOREIGN KEY (class_id, course_id) REFERENCES class(class_id, course_id),
-    PRIMARY KEY (section_id, class_id, course_id)
+    FOREIGN KEY (class_id, course_id, class_start_datetime) REFERENCES class(class_id, course_id, start_datetime),
+    PRIMARY KEY (section_id, class_id, course_id, class_start_datetime)
 ) ;
 
-INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`) 
-VALUES (1, "Introductions: Terms", "Term Definitions", 1, "REP1101");
+INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`, `class_start_datetime`) 
+VALUES (1, "Introductions: Terms", "Term Definitions", 1, "REP1101", "2021-01-07 00:00:00");
 
-INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`) 
-VALUES (2, "Systems and Operations", "Systems", 1, "REP1101");
+INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`, `class_start_datetime`) 
+VALUES (2, "Systems and Operations", "Systems", 1, "REP1101", "2021-01-07 00:00:00");
 
-INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`) 
-VALUES (1, "Introductions: Users", "Identifying Key Users", 1, "REP2101");
+INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`, `class_start_datetime`) 
+VALUES (1, "Introductions: Terms", "Term Definitions", 2, "REP1101", "2021-01-07 00:00:00");
+
+INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`, `class_start_datetime`) 
+VALUES (1, "Introductions: Measurments", "Units and Scales", 1, "REP1201", "2021-01-07 00:00:00");
+
+INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`, `class_start_datetime`) 
+VALUES (1, "Introductions: Components", "Component Quiz", 1, "REP1301", "2021-01-07 00:00:00");
+
+INSERT INTO `section` (`section_id`, `section_name`, `quiz_name`, `class_id`, `course_id`, `class_start_datetime`) 
+VALUES (1, "Introductions: Users", "Identifying Key Users", 1, "REP2101", "2021-01-07 00:00:00");
