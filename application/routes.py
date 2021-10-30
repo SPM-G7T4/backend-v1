@@ -20,6 +20,7 @@ from .course import view_course_details
 # enrolment
 from .enrolment import create_enrolment
 from .enrolment import view_enrolment
+from .enrolment import change_enrolment_status
 
 # completed
 from .completed import view_completed_courses
@@ -88,6 +89,13 @@ def return_learner_enrolment():
     extracted_learner_email =  jsonResponse["learner_email"]
 
     return view_enrolment(extracted_learner_email)
+
+@app.route("/enrolments/approve", methods=['PUT'])
+def return_enrolment_approval_status():
+    data = request.data
+    jsonResponse = json.loads(data.decode('utf-8'))
+    
+    return change_enrolment_status(jsonResponse)
 
 @app.route("/enrolments/view", methods=['GET'])
 def return_all_enrolment():

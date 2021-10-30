@@ -77,3 +77,32 @@ def view_enrolment(input_learner_email=None):
                 "message": "There was an issue viewing the enrolments. " + str(e)
             }
         ), 500
+
+
+def change_enrolment_status(request_body):
+    try :
+        enrolment = Enrolment.query.filter_by(
+            learner_email = request_body["learner_email"],
+            course_id = request_body["course_id"],
+            class_id = request_body["class_id"],
+            class_start_datetime = request_body["class_start_datetime"] 
+        ).first()
+        enrolment.approver_email = request_body["approver_email"]
+        enrolment.status = request_body["status"]
+        db.session.commit()
+
+        return jsonify(
+            {
+                "code": 200,
+                "message": "Success",
+                "data": enrolment.json()
+            }
+        ), 200
+
+    except Exception as e:
+        return jsonify(
+            {
+                "code": 500,
+                "message": "There was an issue changing enrolment status. " + str(e)
+            }
+        ), 500
