@@ -7,17 +7,23 @@ class Learner(db.Model):
     email = db.Column(db.String(64), primary_key=True)
     name = db.Column(db.String(64), nullable=False)
     password = db.Column(db.String(32), nullable=False)
+    designation = db.Column(db.String(64), nullable=False)
+    department = db.Column(db.String(64), nullable=False)
 
-    def __init__(self, email, name, password):
+    def __init__(self, email, name, password, designation, department):
         self.email = email
         self.name = name
         self.password = password
+        self.designation = designation
+        self.department = department
 
     def json(self):
         return {
             "email": self.email,
             "name": self.name,
-            "password": self.password
+            "password": self.password,
+            "designation": self.designation,
+            "department": self.department
         }
 
 class HR(db.Model):
