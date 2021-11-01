@@ -83,10 +83,10 @@ class Class(db.Model):
     class_id = db.Column(db.Integer, primary_key=True)
     class_size = db.Column(db.Integer, nullable=False)
     trainer_email = db.Column(db.String(64),db.ForeignKey('trainer.email'), nullable=True)
-    enrol_start_datetime = db.Column(db.DateTime, nullable=True)
-    enrol_end_datetime = db.Column(db.DateTime, nullable=True)
-    start_datetime = db.Column(db.DateTime, nullable=True, primary_key=True)
-    end_datetime = db.Column(db.DateTime, nullable=True)
+    enrol_start_datetime = db.Column(db.DateTime, nullable=False)
+    enrol_end_datetime = db.Column(db.DateTime, nullable=False)
+    start_datetime = db.Column(db.DateTime, primary_key=True)
+    end_datetime = db.Column(db.DateTime, nullable=False)
     course_id = db.Column(db.String(7),db.ForeignKey('course.id'), primary_key=True)
 
     def __init__(self, class_id, class_size, trainer_email, start_datetime, end_datetime, course_id, enrol_start_datetime, enrol_end_datetime):
@@ -225,7 +225,7 @@ class Section(db.Model):
 class Question(db.Model):
     __tablename__ = 'question'
     question_id = db.Column(db.Integer, primary_key=True)
-    quiz_id = db.Column(db.Integer, nullable=False)
+    quiz_id = db.Column(db.Integer, primary_key=True)
     question_text = db.Column(db.String(128), nullable=False)
     answer_id = db.Column(db.Integer, nullable=False)
     
@@ -246,8 +246,8 @@ class Question(db.Model):
 class Option(db.Model):
     __tablename__ = 'option'
     option_id = db.Column(db.Integer, primary_key=True)
-    question_id = db.Column(db.Integer, nullable=False)
-    quiz_id = db.Column(db.Integer, nullable=False)
+    question_id = db.Column(db.Integer, primary_key=True)
+    quiz_id = db.Column(db.Integer, primary_key=True)
     option_value = db.Column(db.String(128), nullable=False)
     
     def __init__(self, option_id, question_id, quiz_id, option_value):
