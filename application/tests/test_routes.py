@@ -21,4 +21,4 @@ def test_get_all_courses():
 
     print(response.json())
 
-# test_get_all_learners()
+test_get_all_learners()
