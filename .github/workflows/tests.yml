@@ -23,6 +23,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Setup Flask
-      # run: python wsgi.py
+      run: python wsgi.py
     - name: Test with pytest
       run: pytest
