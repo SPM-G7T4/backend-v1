@@ -27,7 +27,7 @@ from .completed import view_completed_courses
 
 
 # Endpoints
-
+# def configure_routes(app):
 @app.route("/", methods=['GET'])
 def hello_world():
     return "<h1>Greetings from SPM-G7T4</h1>"
