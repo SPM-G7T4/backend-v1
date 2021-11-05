@@ -24,8 +24,8 @@ jobs:
         pip install -r requirements.txt
     - name: Setup Flask
       env: 
-        SQLALCHEMY_DATABASE_URI: ${{secret.SQLALCHEMY_DATABASE_URI}}
-        FLASK_ENV: ${{secret.FLASK_ENV}}
+        SQLALCHEMY_DATABASE_URI: ${{secret. SQLALCHEMY_DATABASE_URI}}
+        FLASK_ENV: ${{secret. FLASK_ENV}}
       run: python wsgi.py
     - name: Test with pytest
       run: pytest
