@@ -1,4 +1,4 @@
-# import pytest
+import pytest
 import requests
 import json
 # from application import create_app
