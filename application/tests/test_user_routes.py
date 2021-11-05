@@ -32,7 +32,7 @@ def test_get_all_learners():
     # assert values here
     assert response.status_code == 200
     assert response_body["data"]["learners"][0]["name"] == "Niankai"
-    assert response_body["data"]["learners"][1]["name"] == "Sean"
+    assert response_body["data"]["learners"][1]["name"] == "Seaner"
     assert len(response_body["data"]["learners"]) == 2
     return
 
