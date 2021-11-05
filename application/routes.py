@@ -33,9 +33,8 @@ from .quiz import view_quiz_details
 from .quiz import attach_quiz
 
 
-
 # Endpoints
-
+# def configure_routes(app):
 @app.route("/", methods=['GET'])
 def hello_world():
     return "<h1>Greetings from SPM-G7T4</h1>"
