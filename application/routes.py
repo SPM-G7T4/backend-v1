@@ -33,7 +33,6 @@ from .quiz import view_quiz_details
 from .quiz import attach_quiz
 
 
-
 # Endpoints
 # def configure_routes(app):
 @app.route("/", methods=['GET'])
