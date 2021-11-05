@@ -33,6 +33,7 @@ def test_get_all_learners():
     print(response_body)
     assert response_body["data"]["learners"][0]["name"] == "niankai"
     assert response_body["data"]["learners"][1]["name"] == "sean"
+    assert len(response_body["data"]["learners"]) == 2
     return
 
 # def test_get_all_courses():
