@@ -36,4 +36,3 @@ def test_get_all_learners():
     assert len(response_body["data"]["learners"]) == 2
     return
 
-
