@@ -21,7 +21,6 @@ def setup_database():
 #     d = DatabaseController()
 #     d.down_database(app)
 
-
 def test_get_all_quizzes(setup_database):
 
     url = '/quiz/view'
