@@ -1,0 +1,3 @@
+DROP DATABASE IF EXISTS `spm_g7t4_test`;
+CREATE DATABASE IF NOT EXISTS `spm_g7t4_test`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `spm_g7t4_test`;
