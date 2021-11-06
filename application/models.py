@@ -17,7 +17,7 @@ class Learner(db.Model):
         self.designation = designation
         self.department = department
 
-    def json(self):
+    def get_details(self):
         return {
             "email": self.email,
             "name": self.name,
@@ -37,7 +37,7 @@ class HR(db.Model):
         self.name = name
         self.password = password
 
-    def json(self):
+    def get_details(self):
         return {
             "email": self.email,
             "name": self.name,
@@ -55,7 +55,7 @@ class Trainer(db.Model):
         self.name = name
         self.password = password
 
-    def json(self):
+    def get_details(self):
         return {
             "email": self.email,
             "name": self.name,
@@ -76,7 +76,7 @@ class Course(db.Model):
         self.created_datetime = created_datetime
         self.description = description
 
-    def json(self):
+    def get_details(self):
         return {
             "course_id": self.course_id,
             "course_name": self.course_name,
@@ -105,7 +105,7 @@ class Class(db.Model):
         self.enrol_start_datetime = enrol_start_datetime
         self.enrol_end_datetime = enrol_end_datetime
 
-    def json(self):
+    def get_details(self):
         return {
             "class_id": self.class_id,
             "class_size": self.class_size,
@@ -139,7 +139,7 @@ class Enrolment(db.Model):
         self.status = status
         
 
-    def json(self):
+    def get_details(self):
         return {
             "learner_email": self.learner_email,
             "enrolment_datetime": self.enrolment_datetime.strftime("%Y-%m-%d %H:%M:%S"),
@@ -161,7 +161,7 @@ class Prerequisite(db.Model):
         self.postrequisite_id = postrequisite_id
         self.created_datetime = created_datetime
     
-    def json(self):
+    def get_details(self):
         return {
             "prerequisite_id": self.prerequisite_id,
             "postrequisite_id": self.postrequisite_id,
@@ -179,7 +179,7 @@ class Completed(db.Model):
         self.course_id = course_id
         self.completion_datetime = completion_datetime
     
-    def json(self):
+    def get_details(self):
         return {
             "learner_email": self.learner_email,
             "course_id": self.course_id,
@@ -195,7 +195,7 @@ class Quiz(db.Model):
         self.quiz_id = quiz_id
         self.quiz_name = quiz_name
     
-    def json(self):
+    def get_details(self):
         return {
             "quiz_id": self.quiz_id,
             "quiz_name": self.quiz_name
@@ -218,7 +218,7 @@ class Section(db.Model):
         self.course_id = course_id
         self.class_start_datetime = class_start_datetime
     
-    def json(self):
+    def get_details(self):
         return {
             "section_id": self.section_id,
             "section_name": self.section_name,
@@ -241,7 +241,7 @@ class Question(db.Model):
         self. question_text =  question_text
         self.answer_id = answer_id
 
-    def json(self):
+    def get_details(self):
         return {
             "question_id": self.question_id,
             "quiz_id": self.quiz_id,
@@ -262,7 +262,7 @@ class Option(db.Model):
         self.quiz_id = quiz_id
         self.option_value = option_value
 
-    def json(self):
+    def get_details(self):
         return {
             "option_id": self.option_id,
             "question_id": self.question_id,
