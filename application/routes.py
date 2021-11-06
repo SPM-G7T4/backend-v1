@@ -151,3 +151,16 @@ class MainController():
     @app.errorhandler(404)
     def page_not_found(error):
         return render_template('404.html'), 404
+
+    @app.route("/database/up", methods=['GET'])
+    def return_up_database():
+        databaseController = DatabaseController()
+        return databaseController.up_database()
+
+    @app.route("/database/down", methods=['GET'])
+    def return_down_database():
+        databaseController = DatabaseController()
+        return databaseController.down_database()
+
+
+

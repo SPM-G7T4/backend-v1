@@ -2,11 +2,14 @@ import pytest
 import json
 import sys
 sys.path.append('../../')
-from wsgi import app
+from application import create_app
+from application.DatabaseController import DatabaseController
 
 def test_get_all_quizzes():
     # This is an example test case, feel free to copy/delete/modify
-    client = app.test_client()
+    client = create_app().test_client()
+    databaseController = DatabaseController()
+    databaseController.up_database()
 
     # Define the relative url for the endpoint you will test here
     url = '/quiz/view'
@@ -21,4 +24,6 @@ def test_get_all_quizzes():
     assert response_body["data"]["quiz"][1]["quiz_name"] == "Systems"
     assert response_body["data"]["quiz"][1]["quiz_id"] == 2
     assert len(response_body["data"]["quiz"]) > 0
+
+    databaseController.down_database()
     return
