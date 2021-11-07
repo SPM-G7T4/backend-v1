@@ -1,39 +1,42 @@
-import pytest
 import json
 import sys
 sys.path.append('../../')
-from wsgi import app
 
-def test_home_page():
-    # This is an example test case, feel free to copy/delete/modify
-    client = app.test_client()
+def test_get_all_quizzes(setup_database):
+    url = '/quiz/view'
 
-    # Define the relative url for the endpoint you will test here
-    url = '/'
-
-    response = client.get(url)
-
-    # assert values here
-    assert response.get_data() == b'<h1>Greetings from SPM-G7T4</h1>'
-    assert response.status_code == 200
-    return
-
-def test_get_all_learners():
-    # This is an example test case, feel free to copy/delete/modify
-    client = app.test_client()
-
-    # Define the relative url for the endpoint you will test here
-    url = '/learners'
-
-    response = client.get(url)
-
+    response = setup_database.get(url)
     response_body = json.loads(response.get_data())
 
-    # assert values here
+    assert len(response_body["data"]["quiz"]) > 0
     assert response.status_code == 200
-    assert response_body["data"]["learners"][0]["name"] == "Niankai"
-    assert response_body["data"]["learners"][1]["name"] == "Sean"
-    assert len(response_body["data"]["learners"]) == 2
-    return
+    assert response_body["data"]["quiz"][0]["quiz_name"] == "Term Definitions"
+    assert response_body["data"]["quiz"][1]["quiz_name"] == "Systems"
+    assert response_body["data"]["quiz"][1]["quiz_id"] == 2
+    
+def test_add_quiz(setup_database):
+    # View the quizzes before I create a new quiz
+    url = '/quiz/view'
 
+    response = setup_database.get(url)
+    response_body = json.loads(response.get_data())
+        
+    assert response.status_code == 200
 
+    url = '/quiz/create'
+
+    req_body = {
+        "quiz_name": "New Test Quiz"
+    }
+
+    response = setup_database.post(url, data=json.dumps(req_body), content_type='application/json')
+    response_body = json.loads(response.get_data())
+
+    # View the quizzes AFTER I create a new quiz
+    url = '/quiz/view'
+
+    response = setup_database.get(url)
+    response_body = json.loads(response.get_data())
+
+    assert response.status_code == 200
+    assert response_body["data"]["quiz"][-1]["quiz_name"] == "New Test Quiz"

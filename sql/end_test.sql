@@ -1,0 +1,14 @@
+USE `spm_g7t4_test`;
+
+DROP TABLE IF EXISTS `option`;
+DROP TABLE IF EXISTS `question`;
+DROP TABLE IF EXISTS `section`;
+DROP TABLE IF EXISTS `quiz`;
+DROP TABLE IF EXISTS `enrolment`;
+DROP TABLE IF EXISTS `completed`;
+DROP TABLE IF EXISTS `class`;
+DROP TABLE IF EXISTS `prerequisite`;
+DROP TABLE IF EXISTS `course`;
+DROP TABLE IF EXISTS `trainer`;
+DROP TABLE IF EXISTS `hr`;
+DROP TABLE IF EXISTS `learner`;

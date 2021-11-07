@@ -1,16 +1,18 @@
 name: Tests
 
 on:
-  - push
-  - pull_request
+  push:
+    branches: [ development ]
+  pull_request:
+    branches: [ development ]
 
 jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest]
-        python-version: ['3.8', '3.9']
+        os: ['ubuntu-latest']
+        python-version: ['3.9']
 
     steps:
     - uses: actions/checkout@v2
@@ -27,3 +29,4 @@ jobs:
         SQLALCHEMY_DATABASE_URI: ${{secrets. SQLALCHEMY_DATABASE_URI}}
         FLASK_ENV: ${{secrets. FLASK_ENV}}
       run: pytest
+    
