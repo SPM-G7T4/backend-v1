@@ -150,7 +150,6 @@ class QuizController():
                 options_list = []
                 for DB_option_obj in DB_options_list:
                     DB_option_diction = DB_option_obj.get_details()
-
                     option_obj = {
                         "option_id": DB_option_diction["option_id"],
                         "option_value": DB_option_diction["option_value"]
