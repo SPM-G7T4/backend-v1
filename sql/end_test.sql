@@ -2,6 +2,7 @@ USE `spm_g7t4_test`;
 
 DROP TABLE IF EXISTS `option`;
 DROP TABLE IF EXISTS `question`;
+DROP TABLE IF EXISTS `course_material`;
 DROP TABLE IF EXISTS `section`;
 DROP TABLE IF EXISTS `quiz`;
 DROP TABLE IF EXISTS `enrolment`;

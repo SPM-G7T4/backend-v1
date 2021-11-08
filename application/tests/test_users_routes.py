@@ -1,4 +1,4 @@
-'''Primary author: Ranullo Avigale Balisacan'''
+""""Primary author: Ranullo Avigale Balisacan"""
 
 import json
 import sys
@@ -61,49 +61,6 @@ def test_get_hr(setup_database):
     #Check for data returned
     assert response_body["data"]["hr"][0]["name"] == "avigale"
     assert response_body["data"]["hr"][1]["name"] == "joen"
-
-
-# def test_learners_completed_courses(setup_database):
-#     """ Test viewing list of learner's completed course """
-#     url = "/completed/view"
-
-#     req_body = {
-#         "learner_email": "sean@smu.edu.sg"
-#     }
-
-#     response = setup_database.post(url, data=json.dumps(
-#         req_body), content_type='application/json')
-#     response_body = json.loads(response.get_data())
-
-#     assert response.status_code == 200
-
-#     assert len(response_body["data"]["course_completed"]) > 0
-#     assert response_body["data"]["course_completed"][0]["course_id"] == "REP1101"
-
-# def test_learners_enrolments(setup_database):
-#     """ Test viewing list course learner successfully enrolled in """
-#     url = "/enrolments/view"
-#     req_body = {
-#         "learner_email": "sean@smu.edu.sg"
-#     }
-#     response = setup_database.post(url, data=json.dumps(
-#         req_body), content_type='application/json')
-#     response_body = json.loads(response.get_data())
-
-#     assert response.status_code == 200
-
-#     assert len(response_body["data"]["enrolments"]) > 0
-
-#     assert response_body["data"]["enrolments"][0]["class_end_datetime"] == "2021-05-30 23:59:59"
-#     assert response_body["data"]["enrolments"][0]["class_id"] == 1
-#     assert response_body["data"]["enrolments"][0]["class_size"] == 40
-
-#     assert response_body["data"]["enrolments"][0]["class_start_datetime"] == "2021-01-07 00:00:00"
-#     assert response_body["data"]["enrolments"][0]["course_id"] == "REP1101"
-#     assert response_body["data"]["enrolments"][0]["course_name"] == "Printer Concepts and Terminology"
-#     assert response_body["data"]["enrolments"][0]["description"] == "Briefly describes the relationship between printers, and their assigned lines, processes and statuses."
-#     assert response_body["data"]["enrolments"][0]["status"] == "enrolled"
-#     assert response_body["data"]["enrolments"][0]["trainer_email"] == "jiale@smu.edu.sg"
 
 def test_learner_check_complete_course(setup_database):
     """ Test whether learner has taken a course """
