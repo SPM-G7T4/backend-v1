@@ -1,7 +1,5 @@
 USE `spm_g7t4_test`;
 
-USE `spm_g7t4_test`;
-
 DROP TABLE IF EXISTS `option`;
 DROP TABLE IF EXISTS `question`;
 DROP TABLE IF EXISTS `section`;
@@ -14,7 +12,8 @@ DROP TABLE IF EXISTS `course`;
 DROP TABLE IF EXISTS `trainer`;
 DROP TABLE IF EXISTS `hr`;
 DROP TABLE IF EXISTS `learner`;
--- Learner
+
+-- Learner;
 
 CREATE TABLE IF NOT EXISTS `learner` (
     `email` varchar(64) NOT NULL PRIMARY KEY,
@@ -30,7 +29,7 @@ VALUES ("niankai@smu.edu.sg", "Niankai", "123", "Junior systems engineer", "Engi
 INSERT INTO `learner` (`email`, `name`, `password`, `designation`, `department`) 
 VALUES ("sean@smu.edu.sg", "Sean", "123", "Junior electrical engineer", "Engineering");
 
--- HR
+-- HR;
 
 CREATE TABLE IF NOT EXISTS `hr` (
     `email` varchar(64) NOT NULL PRIMARY KEY,
@@ -44,7 +43,7 @@ VALUES ("joen@smu.edu.sg", "joen", "123");
 INSERT INTO `hr` (`email`, `name`, `password`) 
 VALUES ("avigale@smu.edu.sg", "avigale", "123");
 
--- Trainer
+-- Trainer;
 
 CREATE TABLE IF NOT EXISTS `trainer` (
     `email` varchar(64) NOT NULL PRIMARY KEY,
@@ -58,7 +57,7 @@ VALUES ("jiale@smu.edu.sg", "Ong Jia Le", "123");
 INSERT INTO `trainer` (`email`, `name`, `password`) 
 VALUES ("ken@smu.edu.sg", "Ken Tich", "123");
 
--- Course
+-- Course;
 
 CREATE TABLE IF NOT EXISTS `course` (
     `course_id` char(7) NOT NULL PRIMARY KEY,
@@ -79,7 +78,7 @@ VALUES ("REP1301", "Printer Startup Tutorial", "Generic Description for REP1301"
 INSERT INTO `course` (`course_id`, `course_name`, `description`) 
 VALUES ("REP2101", "Printing Coach Repairs", "Generic Description for REP2101");
 
--- Prerequisite
+-- Prerequisite;
 
 CREATE TABLE IF NOT EXISTS `prerequisite` (
     `prerequisite_id` char(7) NOT NULL,
@@ -98,7 +97,7 @@ VALUES ("REP1101", "REP1301");
 INSERT INTO `prerequisite` (`prerequisite_id`, `postrequisite_id`) 
 VALUES ("REP1201", "REP1301");
 
--- Class
+-- Class;
 
 CREATE TABLE IF NOT EXISTS `class` (
     `class_id` int(4) NOT NULL,
@@ -132,7 +131,7 @@ VALUES (1, 30, "ken@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "
 INSERT INTO `class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`, `end_datetime`, `course_id`, `enrol_start_datetime`, `enrol_end_datetime`)  
 VALUES (1, 30, "ken@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP2101", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
 
--- Completed
+-- Completed;
 
 CREATE TABLE IF NOT EXISTS `completed` (
     `learner_email` varchar(64) NOT NULL,
@@ -153,7 +152,7 @@ INSERT INTO `completed` (
     "REP1101"
 );
 
--- Enrolment
+-- Enrolment;
 
 CREATE TABLE IF NOT EXISTS `enrolment` (
     `learner_email` varchar(64) NOT NULL,
@@ -212,7 +211,7 @@ INSERT INTO `enrolment` (
     "enrolled"
 );
 
--- Quiz
+-- Quiz;
 
 CREATE TABLE IF NOT EXISTS `quiz` (
     `quiz_id` int(4) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -234,7 +233,7 @@ VALUES ("Component Quiz");
 INSERT INTO `quiz` (`quiz_name`) 
 VALUES ("Identifying Key Users");
 
--- Section
+-- Section;
 
 CREATE TABLE IF NOT EXISTS `section` (
     `section_id` int(4) NOT NULL,
@@ -292,7 +291,7 @@ VALUES (
     1, "Introductions: Users", 5, 
     1, "REP2101", "2021-01-07 00:00:00");
 
--- Question
+-- Question;
 
 CREATE TABLE IF NOT EXISTS `question` (
     `question_id` int(4) NOT NULL,
@@ -322,7 +321,7 @@ VALUES (1, 3, "A kilometer is shorter than a mile.", 1);
 INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`) 
 VALUES (2, 3, "Which of the following is a fundamental quantity", 3);
 
--- Option
+-- Option;
 
 CREATE TABLE IF NOT EXISTS `option` (
     `option_id` int(4) NOT NULL,
@@ -334,7 +333,8 @@ CREATE TABLE IF NOT EXISTS `option` (
     PRIMARY KEY (option_id, question_id, quiz_id)
 );
 
--- Question 1 Quiz 1
+-- Question 1 Quiz 1;
+
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (1, 1, 1, "A set of things working together as parts of a mechanism or an interconnecting network");
 
@@ -347,7 +347,8 @@ VALUES (3, 1, 1, "People and processes that serve a common purpose");
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (4, 1, 1, "Something that generates value by using electricity");
 
--- Question 2 Quiz 1
+-- Question 2 Quiz 1;
+
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (1, 2, 1, "Objects that are used by humans or other objects");
 
@@ -360,7 +361,8 @@ VALUES (3, 2, 1, "A part or element of a larger whole");
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (4, 2, 1, "An abstraction of a real-life concept or model");
 
--- Question 1 Quiz 2
+-- Question 1 Quiz 2;
+
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (1, 1, 2, "Fossil Fuels");
 
@@ -373,21 +375,24 @@ VALUES (3, 1, 2, "Human Labour");
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (4, 1, 2, "Renewable Energy");
 
--- Question 2 Quiz 2
+-- Question 2 Quiz 2;
+
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (1, 2, 2, "True");
 
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (2, 2, 2, "False");
 
--- Question 1 Quiz 3
+-- Question 1 Quiz 3;
+
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (1, 1, 3, "True");
 
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (2, 1, 3, "False");
 
--- Question 2 Quiz 3
+-- Question 2 Quiz 3;
+
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (1, 2, 3, "Force");
 

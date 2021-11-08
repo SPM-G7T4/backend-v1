@@ -3,6 +3,7 @@ CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_
 USE `spm_g7t4`;
 
 -- Learner
+
 DROP TABLE IF EXISTS `learner`;
 CREATE TABLE IF NOT EXISTS `learner` (
     `email` varchar(64) NOT NULL PRIMARY KEY,
@@ -18,7 +19,9 @@ VALUES ("niankai@smu.edu.sg", "Niankai", "123", "Junior systems engineer", "Engi
 INSERT INTO `learner` (`email`, `name`, `password`, `designation`, `department`) 
 VALUES ("sean@smu.edu.sg", "Sean", "123", "Junior electrical engineer", "Engineering");
 
+
 -- HR
+
 DROP TABLE IF EXISTS `hr`;
 CREATE TABLE IF NOT EXISTS `hr` (
     `email` varchar(64) NOT NULL PRIMARY KEY,
@@ -30,9 +33,11 @@ INSERT INTO `hr` (`email`, `name`, `password`)
 VALUES ("joen@smu.edu.sg", "joen", "123");
 
 INSERT INTO `hr` (`email`, `name`, `password`) 
-VALUES ("avigale@smu.edu.sg", "avigale", "123");
+VALUES ("a
+vigale@smu.edu.sg", "avigale", "123");
 
 -- Trainer
+
 DROP TABLE IF EXISTS `trainer`;
 CREATE TABLE IF NOT EXISTS `trainer` (
     `email` varchar(64) NOT NULL PRIMARY KEY,
@@ -44,9 +49,11 @@ INSERT INTO `trainer` (`email`, `name`, `password`)
 VALUES ("jiale@smu.edu.sg", "Ong Jia Le", "123");
 
 INSERT INTO `trainer` (`email`, `name`, `password`) 
-VALUES ("ken@smu.edu.sg", "Ken Tich", "123");
+VALUES ("
+ken@smu.edu.sg", "Ken Tich", "123");
 
 -- Course
+
 DROP TABLE IF EXISTS `course`;
 CREATE TABLE IF NOT EXISTS `course` (
     `course_id` char(7) NOT NULL PRIMARY KEY,
@@ -64,10 +71,12 @@ VALUES ("REP1201", "Printer Operations", "Generic Description for REP1201");
 INSERT INTO `course` (`course_id`, `course_name`, `description`) 
 VALUES ("REP1301", "Printer Startup Tutorial", "Generic Description for REP1301");
 
+
 INSERT INTO `course` (`course_id`, `course_name`, `description`) 
 VALUES ("REP2101", "Printing Coach Repairs", "Generic Description for REP2101");
 
 -- Prerequisite
+
 CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `spm_g7t4`;
 
@@ -90,6 +99,7 @@ INSERT INTO `prerequisite` (`prerequisite_id`, `postrequisite_id`)
 VALUES ("REP1201", "REP1301");
 
 -- Class
+
 DROP TABLE IF EXISTS `class`;
 CREATE TABLE IF NOT EXISTS `class` (
     `class_id` int(4) NOT NULL,
@@ -120,10 +130,12 @@ VALUES (1, 35, "jiale@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59",
 INSERT INTO `class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`, `end_datetime`, `course_id`, `enrol_start_datetime`, `enrol_end_datetime`)  
 VALUES (1, 30, "ken@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP1301", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
 
-INSERT INTO `class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`, `end_datetime`, `course_id`, `enrol_start_datetime`, `enrol_end_datetime`)  
+INSERT INTO 
+`class` (`class_id`, `class_size`, `trainer_email`, `start_datetime`, `end_datetime`, `course_id`, `enrol_start_datetime`, `enrol_end_datetime`)  
 VALUES (1, 30, "ken@smu.edu.sg", "2021-01-07 00:00:00", "2021-05-30 23:59:59", "REP2101", "2020-12-01 00:00:00", "2020-12-30 23:59:59");
 
 -- Completed
+
 CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `spm_g7t4`;
 
@@ -147,7 +159,9 @@ INSERT INTO `completed` (
     "REP1101"
 );
 
+
 -- Enrolment
+
 CREATE DATABASE IF NOT EXISTS `spm_g7t4`DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `spm_g7t4`;
 
@@ -209,7 +223,9 @@ INSERT INTO `enrolment` (
     "enrolled"
 );
 
+
 -- Quiz
+
 DROP TABLE IF EXISTS `quiz`;
 CREATE TABLE IF NOT EXISTS `quiz` (
     `quiz_id` int(4) NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -232,6 +248,7 @@ INSERT INTO `quiz` (`quiz_name`)
 VALUES ("Identifying Key Users");
 
 -- Section
+
 DROP TABLE IF EXISTS `section`;
 CREATE TABLE IF NOT EXISTS `section` (
     `section_id` int(4) NOT NULL,
@@ -290,6 +307,7 @@ VALUES (
     1, "REP2101", "2021-01-07 00:00:00");
 
 -- Question
+
 DROP TABLE IF EXISTS `question`;
 CREATE TABLE IF NOT EXISTS `question` (
     `question_id` int(4) NOT NULL,
@@ -320,6 +338,7 @@ INSERT INTO `question` (`question_id`, `quiz_id`, `question_text`, `answer_id`)
 VALUES (2, 3, "Which of the following is a fundamental quantity", 3);
 
 -- Option
+
 DROP TABLE IF EXISTS `option`;
 CREATE TABLE IF NOT EXISTS `option` (
     `option_id` int(4) NOT NULL,
@@ -332,6 +351,7 @@ CREATE TABLE IF NOT EXISTS `option` (
 );
 
 -- Question 1 Quiz 1
+
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (1, 1, 1, "A set of things working together as parts of a mechanism or an interconnecting network");
 
@@ -345,6 +365,7 @@ INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`)
 VALUES (4, 1, 1, "Something that generates value by using electricity");
 
 -- Question 2 Quiz 1
+
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (1, 2, 1, "Objects that are used by humans or other objects");
 
@@ -358,6 +379,7 @@ INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`)
 VALUES (4, 2, 1, "An abstraction of a real-life concept or model");
 
 -- Question 1 Quiz 2
+
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (1, 1, 2, "Fossil Fuels");
 
@@ -371,6 +393,7 @@ INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`)
 VALUES (4, 1, 2, "Renewable Energy");
 
 -- Question 2 Quiz 2
+
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (1, 2, 2, "True");
 
@@ -378,6 +401,7 @@ INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`)
 VALUES (2, 2, 2, "False");
 
 -- Question 1 Quiz 3
+
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (1, 1, 3, "True");
 
@@ -385,6 +409,7 @@ INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`)
 VALUES (2, 1, 3, "False");
 
 -- Question 2 Quiz 3
+
 INSERT INTO `option` (`option_id`, `question_id`, `quiz_id`, `option_value`) 
 VALUES (1, 2, 3, "Force");
 
