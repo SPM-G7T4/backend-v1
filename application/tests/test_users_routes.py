@@ -1,4 +1,5 @@
-#Primary author: Ranullo Avigale Balisacan
+'''Primary author: Ranullo Avigale Balisacan'''
+
 import json
 import sys
 sys.path.append('../../')
@@ -104,20 +105,44 @@ def test_get_hr(setup_database):
 #     assert response_body["data"]["enrolments"][0]["status"] == "enrolled"
 #     assert response_body["data"]["enrolments"][0]["trainer_email"] == "jiale@smu.edu.sg"
 
-# def test_learner_eligibility(setup_database):
-#     url = '/learners/eligibility'
+def test_learner_check_complete_course(setup_database):
+    """ Test whether learner has taken a course """
+    url = '/learners/eligibility'
 
-#     req_body =  {
-#         "learner_email" : "sean@smu.edu.sg",
-#         "course_id" : "REP1101",
-#         "class_id" : 1
-#     }
-#     response = setup_database.post(url, data=json.dumps(
-#         req_body), content_type='application/json')
+    req_body =  {
+        "learner_email" : "sean@smu.edu.sg",
+        "course_id" : "REP1101",
+        "class_id" : 1
+    }
+    response = setup_database.post(url, data=json.dumps(
+        req_body), content_type='application/json')
 
-#     response_body = json.loads(response.get_data())
+    response_body = json.loads(response.get_data())
 
-#     assert response.status_code == 500
+    assert response.status_code == 200
 
-#     assert response_body["data"][0]["eligibility"] == True
+    assert response_body["data"]["eligibility"] == False
+    assert response_body["data"]["reason"] == "Completed Course"
+
+def test_learner_check_prereq(setup_database):
+    """ Test whether learner has taken all the prequisite for a course """
+
+    url = '/learners/eligibility'
+
+    req_body =  {
+        "learner_email" : "niankai@smu.edu.sg",
+        "course_id" : "REP1301",
+        "class_id" : 1
+    }
+    response = setup_database.post(url, data=json.dumps(
+        req_body), content_type='application/json')
+
+    response_body = json.loads(response.get_data())
+
+    assert response.status_code == 200
+
+    assert response_body["data"]["eligibility"] == False
+    assert response_body["data"]["reason"] == "Prerequisite not met"
+
+
 
