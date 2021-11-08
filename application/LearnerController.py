@@ -27,7 +27,7 @@ class LearnerController():
     def check_eligibility(self, input_learner_email, input_course_id, input_class_id):
         
         try :
-            [eligibility, reason] = get_eligibility_and_reason(input_learner_email, input_course_id, input_class_id)
+            [eligibility, reason] = self.get_eligibility_and_reason(input_learner_email, input_course_id, input_class_id)
 
             return jsonify(
                 {
