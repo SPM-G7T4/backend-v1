@@ -1,4 +1,4 @@
-from application.models import Class, Section
+from application.models import Class, Section, Material
 from flask import jsonify
 from application import db
 
@@ -65,7 +65,33 @@ class ClassController():
             for section in dbClassSectionList:
                 sectionJson = section.get_details()
                 
+                section_id = sectionJson["section_id"]
+                class_id = sectionJson["class_id"]
+                course_id = sectionJson["course_id"]
+                class_start_datetime = sectionJson["class_start_datetime"]
+
+                listOfMaterials = []
+                dbMaterialsList = Material.query.filter_by(
+                    section_id = section_id,
+                    class_id = class_id,
+                    course_id = course_id,
+                    class_start_datetime = class_start_datetime
+                ).all()
+                for dbMaterial in dbMaterialsList:
+                    materialJson = dbMaterial.get_details()
+                    title = materialJson["title"]
+                    view_link = materialJson["view_link"]
+                    download_link = materialJson["download_link"]
+                    materialJson = {
+                        "title" : title,
+                        "view_link" : view_link,
+                        "download_link" : download_link
+                    }
+                    listOfMaterials.append(materialJson)
+
+                sectionJson["materials"] = listOfMaterials
                 listOfSections.append(sectionJson)
+
 
             return jsonify(
                 {

@@ -1,9 +1,8 @@
-# Primary Author: Choon Wing Kit Sean
+"""Primary Author: Choon Wing Kit Sean"""
 
 import json
 import sys
 sys.path.append('../../')
-
 
 def test_view_all_enrolment(setup_database):
     """ Test viewing list of all enrolments """

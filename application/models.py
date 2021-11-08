@@ -228,6 +228,39 @@ class Section(db.Model):
             "class_start_datetime": self.class_start_datetime.strftime("%Y-%m-%d %H:%M:%S")
         }
 
+class Material(db.Model):
+    __tablename__ = 'course_material'
+    material_id = db.Column(db.Integer, primary_key=True)
+    section_id = db.Column(db.Integer, db.ForeignKey('section.section_id'), primary_key=True)
+    class_id = db.Column(db.Integer, db.ForeignKey('section.class_id'), primary_key=True)
+    course_id = db.Column(db.String(7), db.ForeignKey('section.course_id'), primary_key=True)
+    class_start_datetime = db.Column(db.DateTime, db.ForeignKey('section.class_start_datetime'), primary_key=True)
+    title = db.Column(db.String(64), nullable=False)
+    view_link = db.Column(db.String(256), nullable=False)
+    download_link = db.Column(db.String(256), nullable=False)
+    
+    def __init__(self, material_id, section_id, class_id, course_id, class_start_datetime, title, view_link, download_link):
+        self.material_id = material_id
+        self.section_id = section_id
+        self.class_id = class_id
+        self.course_id = course_id
+        self.class_start_datetime= class_start_datetime
+        self.title = title
+        self.view_link = view_link
+        self.download_link = download_link
+
+    def get_details(self):
+        return {
+            "material_id": self.material_id,
+            "section_id": self.section_id,
+            "class_id": self.class_id,
+            "course_id": self.course_id,
+            "class_start_datetime": self.class_start_datetime.strftime("%Y-%m-%d %H:%M:%S"),
+            "title": self.title,
+            "view_link": self.view_link,
+            "download_link": self.download_link
+        }
+
 class Question(db.Model):
     __tablename__ = 'question'
     question_id = db.Column(db.Integer, primary_key=True)
