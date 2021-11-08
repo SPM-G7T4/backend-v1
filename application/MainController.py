@@ -6,23 +6,26 @@ import json
 # Routes to files
 
 # learner
-from .learner import LearnerController
+from .LearnerController import LearnerController
 # hr
-from .hr import HrController
+from .HrController import HrController
 # trainer
-from .trainer import TrainerController
+from .TrainerController import TrainerController
 
 # course
-from .course import CourseController
+from .CourseController import CourseController
+
+# course
+from .ClassController import ClassController
 
 # enrolment
-from .enrolment import EnrolmentController
+from .EnrolmentController import EnrolmentController
 
 # completed
-from .completed import CompletedController
+from .CompletedController import CompletedController
 
 # quiz
-from .quiz import QuizController
+from .QuizController import QuizController
 
 
 # Endpoints
@@ -71,6 +74,15 @@ class MainController():
     def return_course_details(course_id):
         courseController = CourseController()
         return courseController.view_course_details(course_id)
+
+    # class
+    @app.route("/classes/trainer", methods=['POST'])
+    def return_trainer_classes():
+        data = request.data
+        jsonResponse = json.loads(data.decode('utf-8'))
+
+        classController = ClassController()
+        return classController.view_trainer_classes(jsonResponse)
 
     # enrolment
     @app.route("/enrolments/create", methods=['POST'])
