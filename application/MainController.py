@@ -84,6 +84,14 @@ class MainController():
         classController = ClassController()
         return classController.view_trainer_classes(jsonResponse)
 
+    @app.route("/classes/sections", methods=['POST'])
+    def return_class_sections():
+        data = request.data
+        jsonResponse = json.loads(data.decode('utf-8'))
+
+        classController = ClassController()
+        return classController.view_class_sections(jsonResponse)
+
     # enrolment
     @app.route("/enrolments/create", methods=['POST'])
     def return_enrolment_creation_status():
